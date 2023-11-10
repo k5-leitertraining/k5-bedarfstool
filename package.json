@@ -1,0 +1,28 @@
+{
+  "name": "k5-bedarfstool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsup",
+    "dev": "concurrently \"pnpm:dev:*\"",
+    "dev:transpile": "tsup --watch",
+    "dev:server": "cd dist && live-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "live-server": "^1.2.2",
+    "prettier": "3.0.3",
+    "tsup": "^7.2.0"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
+  }
+}
