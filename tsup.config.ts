@@ -6,5 +6,9 @@ export default defineConfig({
   sourcemap: true,
   clean: false,
   target: 'chrome119',
+  format: 'esm',
+  outExtension: () => ({
+    js: '.js',
+  }),
   publicDir: true,
 })
