@@ -3,12 +3,14 @@ export const getTemplate = ({
   dataInjects,
   templateInjects,
   templateReplaces,
+  withVModel,
   shouldSkipRoot,
 }: {
   templateRoot: string
   dataInjects?: Record<string, string>
   templateInjects?: Record<string, string>
   templateReplaces?: Record<string, string>
+  withVModel?: Record<string, string>
   shouldSkipRoot?: boolean
 }) => {
   const templateRootQueryString =
@@ -66,6 +68,14 @@ export const getTemplate = ({
       elements.forEach((element) => {
         element.outerHTML = value
       })
+    })
+  }
+  if (withVModel) {
+    Object.entries(withVModel).forEach(([key, value]) => {
+      const element = templateElement.querySelector(`[data-bdtl="${key}"]`)
+      if (element) {
+        element.setAttribute('v-model', value)
+      }
     })
   }
 

@@ -17,7 +17,7 @@ export default defineComponent({
           leave-from-class="opacity-100"
           leave-to-class="opacity-0"
         >
-          <question :question="currentQuestion" :key="currentQuestionKey" />
+          <question :question="currentQuestion" :key="currentQuestionKey" @update:answer="setCurrentQuestionAnswer($event.index, $event.value)"/>
         </Transition>
       `,
     },
@@ -36,6 +36,7 @@ export default defineComponent({
       currentQuestion,
       incrementCurrentQuestionIndex,
       decrementCurrentQuestionIndex,
+      setCurrentQuestionAnswer,
     } = useQuestions()
 
     const onArrowLeft = async () => {
@@ -47,7 +48,7 @@ export default defineComponent({
     }
 
     const currentQuestionKey = computed(() => {
-      return currentQuestion.value.title
+      return currentQuestion.value?.title || ''
     })
 
     return {
@@ -55,6 +56,7 @@ export default defineComponent({
       currentQuestionKey,
       onArrowLeft,
       onArrowRight,
+      setCurrentQuestionAnswer,
     }
   },
   components: {

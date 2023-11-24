@@ -1,4 +1,4 @@
-import { createApp, ref, watch } from 'vue'
+import { createApp } from 'vue'
 import TrackRoot from './components/TrackRoot.ts'
 import QuestionRoot from './components/QuestionRoot.ts'
 import { getTemplate } from './components/getTemplate.ts'

@@ -7,7 +7,8 @@ export type QuestionType = {
 }
 
 export type AnswerType = {
-  answer: string
+  label: string
+  value: boolean | null
 }
 
 const getQuestionsData = (): QuestionType[] => {
@@ -24,12 +25,13 @@ const getQuestionsData = (): QuestionType[] => {
 
     const answerElements = element.querySelectorAll('[data-bdtl="answer"]')
     const answers = [...answerElements].map((element, index) => {
-      const answer =
+      const label =
         element
           .querySelector('[data-bdtl="answer__label"]')
           ?.textContent?.trim() || ''
       return {
-        answer,
+        label,
+        value: null,
       }
     })
     return {
@@ -43,30 +45,53 @@ const getQuestionsData = (): QuestionType[] => {
 
 export const allQuestions = getQuestionsData()
 
-export const currentQuestionIndex = ref(0)
+const currentQuestionIndex = ref(0)
+
+const currentAnswers = ref<Record<number, Record<number, boolean>>>({})
 
 export const useQuestions = () => {
-  const allQuestionsComputed = computed(() => allQuestions)
+  const allQuestionsComputed = computed(() =>
+    allQuestions.map((question, questionIndex) => {
+      return {
+        ...question,
+        answers: question.answers.map((answer, answerIndex) => {
+          return {
+            ...answer,
+            value: currentAnswers.value[questionIndex]?.[answerIndex] ?? null,
+          }
+        }),
+      }
+    })
+  )
   const currentQuestionIndexComputed = computed(
     () => currentQuestionIndex.value
   )
 
   const currentQuestion = computed(() => {
-    return allQuestions[currentQuestionIndex.value]
+    return allQuestionsComputed.value[currentQuestionIndex.value]
   })
 
   const incrementCurrentQuestionIndex = () => {
     currentQuestionIndex.value =
-      (currentQuestionIndex.value + 1) % allQuestions.length
+      (currentQuestionIndex.value + 1) % allQuestionsComputed.value.length
   }
 
   const decrementCurrentQuestionIndex = () => {
     currentQuestionIndex.value =
-      Math.abs(currentQuestionIndex.value - 1) % allQuestions.length
+      Math.abs(currentQuestionIndex.value - 1) %
+      allQuestionsComputed.value.length
   }
 
   const setCurrentQuestionIndex = (index: number) => {
-    currentQuestionIndex.value = Math.abs(index) % allQuestions.length
+    currentQuestionIndex.value =
+      Math.abs(index) % allQuestionsComputed.value.length
+  }
+
+  const setCurrentQuestionAnswer = (index: number, value: boolean) => {
+    currentAnswers.value[currentQuestionIndex.value] = {
+      ...currentAnswers.value[currentQuestionIndex.value],
+      [index]: value,
+    }
   }
 
   return {
@@ -76,5 +101,6 @@ export const useQuestions = () => {
     incrementCurrentQuestionIndex,
     decrementCurrentQuestionIndex,
     setCurrentQuestionIndex,
+    setCurrentQuestionAnswer,
   }
 }

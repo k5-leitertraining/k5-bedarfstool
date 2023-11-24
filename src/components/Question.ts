@@ -1,6 +1,7 @@
 import { PropType, computed, defineComponent, toRefs } from 'vue'
 import { getTemplate } from './getTemplate'
 import { QuestionType } from '../data/questions'
+import Answer from './Answer'
 
 export default defineComponent({
   template: getTemplate({
@@ -9,6 +10,17 @@ export default defineComponent({
       question__title: 'title',
       question__question: 'question',
     },
+    templateInjects: {
+      'answer-root': /* html */ `
+        <answer
+          v-for="(answer, index) in answers"
+          :key="index"
+          :label="answer.label"
+          :model-value="answer.value"
+          @update:model-value="$emit('update:answer', { index, value: $event })"
+        />
+      `,
+    },
   }),
   props: {
     question: {
@@ -16,7 +28,10 @@ export default defineComponent({
       required: true,
     },
   },
-
+  components: {
+    Answer,
+  },
+  emits: ['update:answer'],
   setup(props) {
     const { question } = toRefs(props)
     return {
