@@ -1,18 +1,24 @@
 import { defineComponent, computed, PropType } from 'vue'
 import { getTemplate } from './getTemplate'
 
-const template = getTemplate({
-  templateRoot: 'answer',
-  dataInjects: {
-    answer__label: 'label',
-  },
-  withVModel: {
-    answer__checkbox: 'value',
-  },
-})
-
 export default defineComponent({
-  template,
+  template: getTemplate({
+    templateRoot: 'answer',
+    dataInjects: {
+      answer__label: 'label',
+    },
+    withVModel: {
+      answer__checkbox: 'value',
+    },
+    withAttrs: {
+      answer__checkbox: {
+        ':id': 'id',
+      },
+      answer__label: {
+        ':for': 'id',
+      },
+    },
+  }),
   props: {
     label: {
       type: String,
@@ -34,6 +40,7 @@ export default defineComponent({
     })
     return {
       value,
+      id: `answer-${Math.random().toString(36).substr(2, 9)}`,
     }
   },
 })
