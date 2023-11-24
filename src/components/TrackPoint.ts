@@ -1,10 +1,41 @@
 import { PropType, defineComponent } from 'vue'
-import TrackPointDone from './TrackPointDone'
-import TrackPointCurrent from './TrackPointCurrent'
-import TrackPointOpen from './TrackPointOpen'
-import TrackTrackDone from './TrackTrackDone'
-import TrackTrackOpen from './TrackTrackOpen'
 import { TrackPointType } from '../data/trackPoints'
+import { getTemplate } from './getTemplate'
+
+const createTrackPointVariant = (variant: string) =>
+  defineComponent({
+    template: getTemplate({
+      templateRoot: `track-point--${variant}`,
+      dataInjects: {
+        'track-point__number': 'number',
+        'track-point__name': 'name',
+      },
+    }),
+    props: {
+      number: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  })
+
+const TrackPointOpen = createTrackPointVariant('open')
+const TrackPointCurrent = createTrackPointVariant('current')
+const TrackPointDone = createTrackPointVariant('done')
+
+const createTrackTrackVariant = (variant: string) =>
+  defineComponent({
+    template: getTemplate({
+      templateRoot: `track-track--${variant}`,
+    }),
+  })
+
+const TrackTrackOpen = createTrackTrackVariant('open')
+const TrackTrackDone = createTrackTrackVariant('done')
 
 export default defineComponent({
   template: /* html */ `
