@@ -22,61 +22,162 @@
           <h2 class="text-lg font-bold text-center">Lokale Leiterausbildung</h2>
 
           <!-- Track -->
-          <div data-bdtl="track-root" class="flex mx-16 mt-4">
-            <div data-bdtl="track-point--done" class="relative flex-0">
+          <div data-bdtl="track-root" class="flex mx-16 mt-4 mb-16">
+            <div
+              data-bdtl="track-point--done"
+              class="relative cursor-pointer flex-0"
+            >
               <div
                 data-bdtl="track-point__number"
                 class="flex items-center justify-center w-8 h-8 text-center rounded-full text-slate-300 bg-slate-600"
               >
                 1
               </div>
-              <div
-                data-bdtl="track-point__name"
-                class="absolute text-center -left-1/2"
-              >
-                DONE
+              <div class="absolute flex flex-col items-center w-0 left-1/2">
+                <div data-bdtl="track-point__name" class="text-center">
+                  DONE
+                </div>
               </div>
             </div>
             <div
               data-bdtl="track-track--done"
               class="flex-1 h-2 mt-3 -mx-1 bg-slate-600"
             ></div>
-            <div data-bdtl="track-point--current" class="relative flex-0">
+            <div
+              data-bdtl="track-point--current"
+              class="relative cursor-pointer flex-0"
+            >
               <div
                 data-bdtl="track-point__number"
                 class="flex items-center justify-center w-8 h-8 text-center border-2 rounded-full border-slate-600 text-slate-800 bg-slate-400"
               >
                 2
               </div>
-              <div
-                data-bdtl="track-point__name"
-                class="absolute text-center -left-1/2"
-              >
-                CURRENT
+              <div class="absolute flex flex-col items-center w-0 left-1/2">
+                <div data-bdtl="track-point__name" class="text-center">
+                  CURRENT
+                </div>
               </div>
             </div>
             <div
               data-bdtl="track-track--open"
               class="flex-1 h-2 mt-3 -mx-1 bg-slate-400"
             ></div>
-            <div data-bdtl="track-point--open" class="relative flex-0">
+            <div
+              data-bdtl="track-point--open"
+              class="relative cursor-pointer flex-0"
+            >
               <div
                 data-bdtl="track-point__number"
                 class="flex items-center justify-center w-8 h-8 text-center rounded-full text-slate-800 bg-slate-400"
               >
                 3
               </div>
-              <div
-                data-bdtl="track-point__name"
-                class="absolute text-center -left-1/2"
-              >
-                OPEN
+              <div class="absolute flex flex-col items-center w-0 left-1/2">
+                <div data-bdtl="track-point__name" class="text-center">
+                  OPEN
+                </div>
               </div>
             </div>
           </div>
 
+          <!-- Questions -->
+          <div data-bdtl="question-root" class="flex items-center">
+            <div
+              data-bdtl="question-arrow--left"
+              class="flex-grow-0 w-16 text-center cursor-pointer"
+            >
+              ←
+            </div>
+            <div data-bdtl="question-container" class="flex-grow">
+              <div data-bdtl="question" class="p-8 mb-4 shadow">
+                <div data-bdtl="question__title">Ausrichtung 1</div>
+                <div data-bdtl="question__question">
+                  Ausrichtung 1 - Untertitel
+                </div>
+                <div data-bdtl="answers">
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 1 - Antwort 1
+                    </label>
+                  </div>
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 1 - Antwort 2
+                    </label>
+                  </div>
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 1 - Antwort 3
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div data-bdtl="question" class="p-8 mb-4 shadow">
+                <div data-bdtl="question__title">Ausrichtung 2</div>
+                <div data-bdtl="question__question">
+                  Ausrichtung 2 - Untertitel
+                </div>
+                <div data-bdtl="answers">
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 2 - Antwort 1
+                    </label>
+                  </div>
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 2 - Antwort 2
+                    </label>
+                  </div>
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 2 - Antwort 3
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div data-bdtl="question" class="p-8 mb-4 shadow">
+                <div data-bdtl="question__title">Ausrichtung 3</div>
+                <div data-bdtl="question__question">
+                  Ausrichtung 3 - Untertitel
+                </div>
+                <div data-bdtl="answers">
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 3 - Antwort 1
+                    </label>
+                  </div>
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 3 - Antwort 2
+                    </label>
+                  </div>
+                  <div data-bdtl="answer">
+                    <input type="checkbox" data-bdtl="answer__checkbox" />
+                    <label data-bdtl="answer__label">
+                      Ausrichtung 3 - Antwort 3
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-bdtl="question-arrow--right"
+              class="flex-grow-0 w-16 text-center cursor-pointer"
+            >
+              →
+            </div>
+          </div>
+
           <hr class="mt-28" />
-          <div>Fragen</div>
           <div>Auswertung</div>
         </div>
       </div>
