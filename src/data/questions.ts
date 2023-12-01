@@ -13,7 +13,7 @@ export type AnswerType = {
 
 const getQuestionsData = (): QuestionType[] => {
   const questionElements = document.querySelectorAll('[data-bdtl="question"]')
-  const questionsData = [...questionElements].map((element, index) => {
+  const questionsData = [...questionElements].map((element) => {
     const title =
       element
         .querySelector('[data-bdtl="question__title"]')
@@ -24,7 +24,7 @@ const getQuestionsData = (): QuestionType[] => {
         ?.textContent?.trim() || ''
 
     const answerElements = element.querySelectorAll('[data-bdtl="answer"]')
-    const answers = [...answerElements].map((element, index) => {
+    const answers = [...answerElements].map((element) => {
       const label =
         element
           .querySelector('[data-bdtl="answer__label"]')
