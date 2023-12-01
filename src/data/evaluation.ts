@@ -1,5 +1,5 @@
 import { computed, watch } from 'vue'
-import { useQuestions } from './questions'
+import { AnswerType, useQuestions } from './questions'
 
 const getEvaluationData = () => {
   const evaluationTextRaw =
@@ -14,15 +14,61 @@ const getEvaluationData = () => {
 
 const evaluationTexts = getEvaluationData()
 
+const MULTI_SELECT_FACTOR = 0.75
+
+const calculateScoreOfSelectedAnswers = (answers: AnswerType[]) => {
+  const checkedAnswers = answers.filter((answer) => answer.value)
+  const factor = checkedAnswers.length > 1 ? MULTI_SELECT_FACTOR : 1
+  const scoreRaw = checkedAnswers.reduce((score, answer) => {
+    return score + answer.weight
+  }, 0)
+  return scoreRaw * factor
+}
+
+const calculateScoreOfMaxAnswers = (answers: AnswerType[]) => {
+  const positiveAnswers = answers.filter((answer) => answer.weight > 0)
+  const factor = positiveAnswers.length > 1 ? MULTI_SELECT_FACTOR : 1
+  const scoreRaw = positiveAnswers.reduce((score, answer) => {
+    return score + answer.weight
+  }, 0)
+  return scoreRaw * factor
+}
+
+const calculateScoreOfMinAnswers = (answers: AnswerType[]) => {
+  const negativeAnswers = answers.filter((answer) => answer.weight < 0)
+  const factor = negativeAnswers.length > 1 ? MULTI_SELECT_FACTOR : 1
+  const scoreRaw = negativeAnswers.reduce((score, answer) => {
+    return score + answer.weight
+  }, 0)
+  return scoreRaw * factor
+}
+
 export const useEvaluation = () => {
-  // calculate the score
   const { allQuestions } = useQuestions()
+
   const score = computed(() => {
-    const total = allQuestions.value.length
-    const done = allQuestions.value.filter((question) =>
-      question.answers.some(({ value }) => value)
-    ).length
-    return Math.round((done / total) * 100)
+    // current score
+    const currentScore = allQuestions.value.reduce((score, question) => {
+      const questionScore = calculateScoreOfSelectedAnswers(question.answers)
+      return score + questionScore * question.weight
+    }, 0)
+
+    // max score
+    const maxScore = allQuestions.value.reduce((score, question) => {
+      const questionScore = calculateScoreOfMaxAnswers(question.answers)
+      return score + questionScore * question.weight
+    }, 0)
+
+    // min score
+    const minScore = allQuestions.value.reduce((score, question) => {
+      const questionScore = calculateScoreOfMinAnswers(question.answers)
+      return score + questionScore * question.weight
+    }, 0)
+
+    // in percent
+    return currentScore >= 0
+      ? 50 + (currentScore / maxScore) * 50
+      : 50 - (currentScore / minScore) * 50
   })
 
   const evaluationText = computed(() => {

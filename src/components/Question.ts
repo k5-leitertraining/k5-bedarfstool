@@ -17,6 +17,7 @@ export default defineComponent({
           :key="index"
           :label="answer.label"
           :model-value="answer.value"
+          :deactivated="answer.deactivated"
           @update:model-value="$emit('update:answer', { index, value: $event })"
         />
       `,
