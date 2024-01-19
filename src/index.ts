@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
-import TrackRoot from './components/TrackRoot.ts'
-import QuestionRoot from './components/QuestionRoot.ts'
-import EvaluationRoot from './components/EvaluationRoot.ts'
-import { getTemplate } from './components/getTemplate.ts'
+import TrackRoot from './components/TrackRoot'
+import QuestionRoot from './components/QuestionRoot'
+import EvaluationRoot from './components/EvaluationRoot'
+import { getTemplate } from './components/getTemplate'
 
 createApp({
   template: getTemplate({

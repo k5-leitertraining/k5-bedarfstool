@@ -1,4 +1,4 @@
-import { PropType, computed, defineComponent, nextTick, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { getTemplate } from './getTemplate'
 import Question from './Question'
 import QuestionArrow from './QuestionArrow'

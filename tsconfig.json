@@ -13,10 +13,11 @@
     /* If transpiling with TypeScript: */
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "noEmit": true,
+    "noEmit": false,
     /* If your code runs in the DOM: */
-    "lib": ["es2022", "dom", "dom.iterable"],
+    "lib": ["es2022", "dom", "dom.iterable"]
     /* Others: */
-    "allowImportingTsExtensions": true
-  }
+    // "allowImportingTsExtensions": true
+  },
+  "include": ["src/**/*"]
 }
