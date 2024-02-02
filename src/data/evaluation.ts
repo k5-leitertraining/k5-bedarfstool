@@ -78,8 +78,15 @@ export const useEvaluation = () => {
     return evaluationTexts[evaluationTextIndex]
   })
 
+  const isFinished = computed(() => {
+    return allQuestions.value.every((question) =>
+      question.answers.some((answer) => answer.value)
+    )
+  })
+
   return {
     score,
     evaluationText,
+    isFinished,
   }
 }

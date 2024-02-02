@@ -2,7 +2,9 @@ import { createApp } from 'vue'
 import TrackRoot from './components/TrackRoot'
 import QuestionRoot from './components/QuestionRoot'
 import EvaluationRoot from './components/EvaluationRoot'
+import FinishRoot from './components/FinishRoot'
 import { getTemplate } from './components/getTemplate'
+import { useEvaluation } from './data/evaluation'
 
 createApp({
   template: getTemplate({
@@ -18,14 +20,22 @@ createApp({
       'evaluation-root': /* html */ `
         <evaluation-root />
       `,
+      'finish-root': /* html */ `
+        <finish-root v-if="isFinished" />
+      `,
     },
   }),
   components: {
     TrackRoot,
     QuestionRoot,
     EvaluationRoot,
+    FinishRoot,
   },
   setup() {
-    return {}
+    const { isFinished } = useEvaluation()
+
+    return {
+      isFinished,
+    }
   },
 }).mount('#bdtl-app')
