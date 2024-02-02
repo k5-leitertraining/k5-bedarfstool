@@ -209,17 +209,21 @@ var currentAnswers = ref({});
 var isNegativeAnswer = (answer) => {
   return answer.weight < 0;
 };
-var deactivateOppositeAnswers = (answers) => {
-  const checkedAnswers = answers.find(({ value }) => value);
-  if (!checkedAnswers)
-    return answers;
-  return answers.map((answer) => {
-    if (isNegativeAnswer(answer) === isNegativeAnswer(checkedAnswers)) {
-      return answer;
+var deactivateOppositeAnswers = ({
+  questionIndex,
+  answerIndex
+}) => {
+  const answers = allQuestions[questionIndex]?.answers;
+  const checkedAnswer = answers?.[answerIndex];
+  if (!checkedAnswer)
+    return;
+  answers.forEach((answer, index) => {
+    if (isNegativeAnswer(answer) === isNegativeAnswer(checkedAnswer)) {
+      return;
     }
-    return {
-      ...answer,
-      deactivated: true
+    currentAnswers.value[questionIndex] = {
+      ...currentAnswers.value[questionIndex],
+      [index]: false
     };
   });
 };
@@ -228,14 +232,12 @@ var useQuestions = () => {
     () => allQuestions.map((question, questionIndex) => {
       return {
         ...question,
-        answers: deactivateOppositeAnswers(
-          question.answers.map((answer, answerIndex) => {
-            return {
-              ...answer,
-              value: currentAnswers.value[questionIndex]?.[answerIndex] ?? null
-            };
-          })
-        )
+        answers: question.answers.map((answer, answerIndex) => {
+          return {
+            ...answer,
+            value: currentAnswers.value[questionIndex]?.[answerIndex] ?? null
+          };
+        })
       };
     })
   );
@@ -255,6 +257,10 @@ var useQuestions = () => {
     currentQuestionIndex.value = Math.abs(index) % allQuestionsComputed.value.length;
   };
   const setCurrentQuestionAnswer = (index, value) => {
+    deactivateOppositeAnswers({
+      questionIndex: currentQuestionIndex.value,
+      answerIndex: index
+    });
     currentAnswers.value[currentQuestionIndex.value] = {
       ...currentAnswers.value[currentQuestionIndex.value],
       [index]: value
@@ -350,8 +356,7 @@ var Answer_default = defineComponent3({
     },
     withAttrs: {
       answer__checkbox: {
-        ":id": "id",
-        ":disabled": "deactivated"
+        ":id": "id"
       },
       answer__label: {
         ":for": "id"
@@ -362,10 +367,6 @@ var Answer_default = defineComponent3({
     label: {
       type: String,
       required: true
-    },
-    deactivated: {
-      type: Boolean,
-      default: false
     },
     modelValue: {
       type: [Boolean]
@@ -405,7 +406,6 @@ var Question_default = defineComponent4({
           :key="index"
           :label="answer.label"
           :model-value="answer.value"
-          :deactivated="answer.deactivated"
           @update:model-value="$emit('update:answer', { index, value: $event })"
         />
       `
