@@ -13,7 +13,6 @@ export default defineComponent({
     withAttrs: {
       answer__checkbox: {
         ':id': 'id',
-        ':disabled': 'deactivated',
       },
       answer__label: {
         ':for': 'id',
@@ -24,10 +23,6 @@ export default defineComponent({
     label: {
       type: String,
       required: true,
-    },
-    deactivated: {
-      type: Boolean,
-      default: false,
     },
     modelValue: {
       type: [Boolean] as PropType<boolean | null>,

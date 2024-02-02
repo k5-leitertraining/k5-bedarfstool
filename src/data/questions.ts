@@ -10,7 +10,6 @@ export type QuestionType = {
 export type AnswerType = {
   label: string
   value: boolean | null
-  deactivated?: boolean
   weight: number
 }
 
@@ -66,16 +65,23 @@ const isNegativeAnswer = (answer: AnswerType) => {
   return answer.weight < 0
 }
 
-const deactivateOppositeAnswers = (answers: AnswerType[]) => {
-  const checkedAnswers = answers.find(({ value }) => value)
-  if (!checkedAnswers) return answers
-  return answers.map((answer) => {
-    if (isNegativeAnswer(answer) === isNegativeAnswer(checkedAnswers)) {
-      return answer
+const deactivateOppositeAnswers = ({
+  questionIndex,
+  answerIndex,
+}: {
+  questionIndex: number
+  answerIndex: number
+}) => {
+  const answers = allQuestions[questionIndex]?.answers
+  const checkedAnswer = answers?.[answerIndex]
+  if (!checkedAnswer) return
+  answers.forEach((answer, index) => {
+    if (isNegativeAnswer(answer) === isNegativeAnswer(checkedAnswer)) {
+      return
     }
-    return {
-      ...answer,
-      deactivated: true,
+    currentAnswers.value[questionIndex] = {
+      ...currentAnswers.value[questionIndex],
+      [index]: false,
     }
   })
 }
@@ -85,14 +91,12 @@ export const useQuestions = () => {
     allQuestions.map((question, questionIndex) => {
       return {
         ...question,
-        answers: deactivateOppositeAnswers(
-          question.answers.map((answer, answerIndex) => {
-            return {
-              ...answer,
-              value: currentAnswers.value[questionIndex]?.[answerIndex] ?? null,
-            }
-          })
-        ),
+        answers: question.answers.map((answer, answerIndex) => {
+          return {
+            ...answer,
+            value: currentAnswers.value[questionIndex]?.[answerIndex] ?? null,
+          }
+        }),
       }
     })
   )
@@ -121,6 +125,10 @@ export const useQuestions = () => {
   }
 
   const setCurrentQuestionAnswer = (index: number, value: boolean) => {
+    deactivateOppositeAnswers({
+      questionIndex: currentQuestionIndex.value,
+      answerIndex: index,
+    })
     currentAnswers.value[currentQuestionIndex.value] = {
       ...currentAnswers.value[currentQuestionIndex.value],
       [index]: value,
