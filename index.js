@@ -594,9 +594,15 @@ var useEvaluation = () => {
     );
     return evaluationTexts[evaluationTextIndex];
   });
+  const isFinished = computed6(() => {
+    return allQuestions2.value.every(
+      (question) => question.answers.some((answer) => answer.value)
+    );
+  });
   return {
     score,
-    evaluationText
+    evaluationText,
+    isFinished
   };
 };
 
@@ -644,6 +650,14 @@ var EvaluationRoot_default = defineComponent8({
   }
 });
 
+// src/components/FinishRoot.ts
+import { defineComponent as defineComponent9 } from "vue";
+var FinishRoot_default = defineComponent9({
+  template: getTemplate({
+    templateRoot: "finish-root"
+  })
+});
+
 // src/index.ts
 createApp({
   template: getTemplate({
@@ -667,16 +681,26 @@ createApp({
         `
         <evaluation-root />
       `
+      ),
+      "finish-root": (
+        /* html */
+        `
+        <finish-root v-if="isFinished" />
+      `
       )
     }
   }),
   components: {
     TrackRoot: TrackRoot_default,
     QuestionRoot: QuestionRoot_default,
-    EvaluationRoot: EvaluationRoot_default
+    EvaluationRoot: EvaluationRoot_default,
+    FinishRoot: FinishRoot_default
   },
   setup() {
-    return {};
+    const { isFinished } = useEvaluation();
+    return {
+      isFinished
+    };
   }
 }).mount("#bdtl-app");
 //# sourceMappingURL=index.js.map
