@@ -1,7 +1,7 @@
-import { PropType, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { getTemplate } from './getTemplate'
 import TrackPoint from './TrackPoint'
-import { TrackPointType, useTrackPoints } from '../data/trackPoints'
+import { useTrackPoints } from '../data/trackPoints'
 import { useQuestions } from '../data/questions'
 
 export default defineComponent({
@@ -12,7 +12,7 @@ export default defineComponent({
         <template v-for="(trackPoint, index) in trackPoints">
           <track-point 
             :track-point="trackPoint" 
-            :with-track="isLastTrackPoint(index) ? undefined : isTrackDone(index) ? 'done' : 'open'"
+            :with-track="isFirstTrackPoint(index) ? undefined : isTrackDone(index) ? 'done' : 'open'"
             @click="setCurrentQuestionIndex(index)"
           />
         </template>
@@ -25,14 +25,16 @@ export default defineComponent({
     const isTrackDone = (index: number) =>
       trackPoints.value
         .slice(0, index + 1)
-        .every((trackPoint) => trackPoint.status === 'done')
+        .every(
+          (trackPoint) =>
+            trackPoint.status === 'done' || trackPoint.status === 'current'
+        )
 
-    const isLastTrackPoint = (index: number) =>
-      index === trackPoints.value.length - 1
+    const isFirstTrackPoint = (index: number) => index === 0
 
     return {
       isTrackDone,
-      isLastTrackPoint,
+      isFirstTrackPoint,
       trackPoints,
       setCurrentQuestionIndex,
     }

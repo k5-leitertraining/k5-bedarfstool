@@ -39,6 +39,10 @@ const TrackTrackDone = createTrackTrackVariant('done')
 
 export default defineComponent({
   template: /* html */ `
+    <template v-if="withTrack">
+      <track-track-open v-if="withTrack === 'open'" />
+      <track-track-done v-if="withTrack === 'done'" />
+    </template>
     <track-point-open 
       v-if="trackPoint.status === 'open'"
       :number="trackPoint.number"
@@ -56,10 +60,6 @@ export default defineComponent({
       :name="trackPoint.name"
       @click.native="$emit('click')"
     />
-    <template v-if="withTrack">
-      <track-track-open v-if="withTrack === 'open'" />
-      <track-track-done v-if="withTrack === 'done'" />
-    </template>
   `,
   emits: ['click'],
   props: {
