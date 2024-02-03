@@ -114,9 +114,12 @@ export const useQuestions = () => {
   }
 
   const decrementCurrentQuestionIndex = () => {
-    currentQuestionIndex.value =
-      Math.abs(currentQuestionIndex.value - 1) %
-      allQuestionsComputed.value.length
+    const newIndex = currentQuestionIndex.value - 1
+    if (newIndex < 0) {
+      currentQuestionIndex.value = allQuestionsComputed.value.length - 1
+      return
+    }
+    currentQuestionIndex.value = newIndex % allQuestionsComputed.value.length
   }
 
   const setCurrentQuestionIndex = (index: number) => {
