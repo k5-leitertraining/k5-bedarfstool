@@ -122,6 +122,10 @@ var TrackPoint_default = defineComponent({
   template: (
     /* html */
     `
+    <template v-if="withTrack">
+      <track-track-open v-if="withTrack === 'open'" />
+      <track-track-done v-if="withTrack === 'done'" />
+    </template>
     <track-point-open 
       v-if="trackPoint.status === 'open'"
       :number="trackPoint.number"
@@ -139,10 +143,6 @@ var TrackPoint_default = defineComponent({
       :name="trackPoint.name"
       @click.native="$emit('click')"
     />
-    <template v-if="withTrack">
-      <track-track-open v-if="withTrack === 'open'" />
-      <track-track-done v-if="withTrack === 'done'" />
-    </template>
   `
   ),
   emits: ["click"],
@@ -251,7 +251,12 @@ var useQuestions = () => {
     currentQuestionIndex.value = (currentQuestionIndex.value + 1) % allQuestionsComputed.value.length;
   };
   const decrementCurrentQuestionIndex = () => {
-    currentQuestionIndex.value = Math.abs(currentQuestionIndex.value - 1) % allQuestionsComputed.value.length;
+    const newIndex = currentQuestionIndex.value - 1;
+    if (newIndex < 0) {
+      currentQuestionIndex.value = allQuestionsComputed.value.length - 1;
+      return;
+    }
+    currentQuestionIndex.value = newIndex % allQuestionsComputed.value.length;
   };
   const setCurrentQuestionIndex = (index) => {
     currentQuestionIndex.value = Math.abs(index) % allQuestionsComputed.value.length;
@@ -312,7 +317,7 @@ var TrackRoot_default = defineComponent2({
         <template v-for="(trackPoint, index) in trackPoints">
           <track-point 
             :track-point="trackPoint" 
-            :with-track="isLastTrackPoint(index) ? undefined : isTrackDone(index) ? 'done' : 'open'"
+            :with-track="isFirstTrackPoint(index) ? undefined : isTrackDone(index) ? 'done' : 'open'"
             @click="setCurrentQuestionIndex(index)"
           />
         </template>
@@ -323,11 +328,13 @@ var TrackRoot_default = defineComponent2({
   setup() {
     const { trackPoints } = useTrackPoints();
     const { setCurrentQuestionIndex } = useQuestions();
-    const isTrackDone = (index) => trackPoints.value.slice(0, index + 1).every((trackPoint) => trackPoint.status === "done");
-    const isLastTrackPoint = (index) => index === trackPoints.value.length - 1;
+    const isTrackDone = (index) => trackPoints.value.slice(0, index + 1).every(
+      (trackPoint) => trackPoint.status === "done" || trackPoint.status === "current"
+    );
+    const isFirstTrackPoint = (index) => index === 0;
     return {
       isTrackDone,
-      isLastTrackPoint,
+      isFirstTrackPoint,
       trackPoints,
       setCurrentQuestionIndex
     };
