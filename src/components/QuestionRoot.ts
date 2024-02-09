@@ -23,10 +23,10 @@ export default defineComponent({
     },
     templateReplaces: {
       'question-arrow--left': /* html */ `
-        <question-arrow direction="left" @click="onArrowLeft" />
+        <question-arrow direction="left" @click="onArrowLeft" :disabled="isFirstQuestion" />
       `,
       'question-arrow--right': /* html */ `
-        <question-arrow direction="right" @click="onArrowRight" />
+        <question-arrow direction="right" @click="onArrowRight" :disabled="isLastQuestion" />
       `,
     },
   }),
@@ -37,6 +37,8 @@ export default defineComponent({
       incrementCurrentQuestionIndex,
       decrementCurrentQuestionIndex,
       setCurrentQuestionAnswer,
+      isFirstQuestion,
+      isLastQuestion,
     } = useQuestions()
 
     const onArrowLeft = async () => {
@@ -57,6 +59,8 @@ export default defineComponent({
       onArrowLeft,
       onArrowRight,
       setCurrentQuestionAnswer,
+      isFirstQuestion,
+      isLastQuestion,
     }
   },
   components: {

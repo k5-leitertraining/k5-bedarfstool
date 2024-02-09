@@ -138,6 +138,11 @@ export const useQuestions = () => {
     }
   }
 
+  const isFirstQuestion = computed(() => currentQuestionIndex.value === 0)
+  const isLastQuestion = computed(
+    () => currentQuestionIndex.value === allQuestionsComputed.value.length - 1
+  )
+
   return {
     allQuestions: allQuestionsComputed,
     currentQuestionIndex: currentQuestionIndexComputed,
@@ -146,5 +151,7 @@ export const useQuestions = () => {
     decrementCurrentQuestionIndex,
     setCurrentQuestionIndex,
     setCurrentQuestionAnswer,
+    isFirstQuestion,
+    isLastQuestion,
   }
 }
