@@ -7,6 +7,7 @@ export default defineConfig({
   clean: false,
   target: 'chrome119',
   format: 'esm',
+  minify: true,
   outExtension: () => ({
     js: '.js',
   }),

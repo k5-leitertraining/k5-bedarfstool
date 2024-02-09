@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import TrackRoot from './components/TrackRoot'
 import QuestionRoot from './components/QuestionRoot'
 import EvaluationRoot from './components/EvaluationRoot'
+import DownloadRoot from './components/DownloadRoot'
 import FinishRoot from './components/FinishRoot'
 import { getTemplate } from './components/getTemplate'
 import { useEvaluation } from './data/evaluation'
@@ -20,6 +21,9 @@ createApp({
       'evaluation-root': /* html */ `
         <evaluation-root />
       `,
+      'download-root': /* html */ `
+        <download-root v-show="isFinished" />
+      `,
       'finish-root': /* html */ `
         <finish-root v-show="isFinished" />
       `,
@@ -29,6 +33,7 @@ createApp({
     TrackRoot,
     QuestionRoot,
     EvaluationRoot,
+    DownloadRoot,
     FinishRoot,
   },
   setup() {
