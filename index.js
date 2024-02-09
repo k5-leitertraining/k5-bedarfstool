@@ -1,127 +1,13 @@
-// src/index.ts
-import { createApp } from "vue";
-
-// src/components/TrackRoot.ts
-import { defineComponent as defineComponent2 } from "vue";
-
-// src/components/getTemplate.ts
-var getTemplate = ({
-  templateRoot,
-  dataInjects,
-  templateInjects,
-  templateReplaces,
-  withVModel,
-  withAttrs,
-  shouldSkipRoot
-}) => {
-  const templateRootQueryString = templateRoot.startsWith(".") || templateRoot.startsWith("#") ? templateRoot : `[data-bdtl="${templateRoot}"]`;
-  const templateRootElement = document.querySelector(templateRootQueryString);
-  if (!templateRootElement) {
-    return "";
-  }
-  const templateElement = templateRootElement.cloneNode(true);
-  if (dataInjects) {
-    Object.entries(dataInjects).forEach(([key, value]) => {
-      const elements = templateElement.querySelectorAll(`[data-bdtl="${key}"]`);
-      elements.forEach((element) => {
-        element.textContent = `{{${value}}}`;
-      });
-    });
-  }
-  if (templateInjects) {
-    Object.entries(templateInjects).forEach(([key, value]) => {
-      if (key === "&") {
-        templateElement.innerHTML = value;
-        return;
-      }
-      if (key.startsWith(".") || key.startsWith("#")) {
-        const element = templateElement.querySelectorAll(key);
-        element.forEach((element2) => {
-          element2.innerHTML = value;
-        });
-        return;
-      }
-      const elements = templateElement.querySelectorAll(`[data-bdtl="${key}"]`);
-      elements.forEach((element) => {
-        element.innerHTML = value;
-      });
-    });
-  }
-  if (templateReplaces) {
-    Object.entries(templateReplaces).forEach(([key, value]) => {
-      if (key === "&") {
-        templateElement.outerHTML = value;
-        return;
-      }
-      if (key.startsWith(".") || key.startsWith("#")) {
-        const element = templateElement.querySelectorAll(key);
-        element.forEach((element2) => {
-          element2.outerHTML = value;
-        });
-        return;
-      }
-      const elements = templateElement.querySelectorAll(`[data-bdtl="${key}"]`);
-      elements.forEach((element) => {
-        element.outerHTML = value;
-      });
-    });
-  }
-  if (withVModel) {
-    Object.entries(withVModel).forEach(([key, value]) => {
-      const element = templateElement.querySelector(`[data-bdtl="${key}"]`);
-      if (element) {
-        element.setAttribute("v-model", value);
-      }
-    });
-  }
-  if (withAttrs) {
-    Object.entries(withAttrs).forEach(([key, value]) => {
-      const element = templateElement.querySelector(`[data-bdtl="${key}"]`);
-      if (element) {
-        Object.entries(value).forEach(([attr, attrValue]) => {
-          element.setAttribute(attr, attrValue);
-        });
-      }
-    });
-  }
-  return shouldSkipRoot ? templateElement.innerHTML : templateElement.outerHTML;
-};
-
-// src/components/TrackPoint.ts
-import { defineComponent } from "vue";
-var createTrackPointVariant = (variant) => defineComponent({
-  template: getTemplate({
-    templateRoot: `track-point--${variant}`,
-    dataInjects: {
-      "track-point__number": "number",
-      "track-point__name": "name"
-    }
-  }),
-  props: {
-    number: {
-      type: String,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    }
-  }
-});
-var TrackPointOpen = createTrackPointVariant("open");
-var TrackPointCurrent = createTrackPointVariant("current");
-var TrackPointDone = createTrackPointVariant("done");
-var createTrackTrackVariant = (variant) => defineComponent({
-  template: getTemplate({
-    templateRoot: `track-track--${variant}`
-  })
-});
-var TrackTrackOpen = createTrackTrackVariant("open");
-var TrackTrackDone = createTrackTrackVariant("done");
-var TrackPoint_default = defineComponent({
-  template: (
-    /* html */
-    `
+var ct=Object.create;var Me=Object.defineProperty;var ft=Object.getOwnPropertyDescriptor;var dt=Object.getOwnPropertyNames;var ht=Object.getPrototypeOf,pt=Object.prototype.hasOwnProperty;var mt=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(s,h)=>(typeof require<"u"?require:s)[h]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw Error('Dynamic require of "'+r+'" is not supported')});var vt=(r,s)=>()=>(s||r((s={exports:{}}).exports,s),s.exports);var yt=(r,s,h,b)=>{if(s&&typeof s=="object"||typeof s=="function")for(let c of dt(s))!pt.call(r,c)&&c!==h&&Me(r,c,{get:()=>s[c],enumerable:!(b=ft(s,c))||b.enumerable});return r};var wt=(r,s,h)=>(h=r!=null?ct(ht(r)):{},yt(s||!r||!r.__esModule?Me(h,"default",{value:r,enumerable:!0}):h,r));var rt=vt((Oe,qe)=>{"use strict";(function(r,s){typeof define=="function"&&define.amd?define([],s):typeof qe=="object"&&typeof Oe<"u"?qe.exports=s():r.Papa=s()})(Oe,function r(){"use strict";var s=function(){return typeof self<"u"?self:typeof window<"u"?window:typeof s<"u"?s:{}}();function h(){var t=s.URL||s.webkitURL||null,e=r.toString();return a.BLOB_URL||(a.BLOB_URL=t.createObjectURL(new Blob(["var global = (function() { if (typeof self !== 'undefined') { return self; } if (typeof window !== 'undefined') { return window; } if (typeof global !== 'undefined') { return global; } return {}; })(); global.IS_PAPA_WORKER=true; ","(",e,")();"],{type:"text/javascript"})))}var b=!s.document&&!!s.postMessage,c=s.IS_PAPA_WORKER||!1,m={},L=0,a={};if(a.parse=v,a.unparse=R,a.RECORD_SEP="",a.UNIT_SEP="",a.BYTE_ORDER_MARK="\uFEFF",a.BAD_DELIMITERS=["\r",`
+`,'"',a.BYTE_ORDER_MARK],a.WORKERS_SUPPORTED=!b&&!!s.Worker,a.NODE_STREAM_INPUT=1,a.LocalChunkSize=1024*1024*10,a.RemoteChunkSize=1024*1024*5,a.DefaultDelimiter=",",a.Parser=be,a.ParserHandle=Pe,a.NetworkStreamer=W,a.FileStreamer=B,a.StringStreamer=Z,a.ReadableStreamStreamer=de,typeof PAPA_BROWSER_CONTEXT>"u"&&(a.DuplexStreamStreamer=he),s.jQuery){var S=s.jQuery;S.fn.parse=function(t){var e=t.config||{},n=[];return this.each(function(i){var f=S(this).prop("tagName").toUpperCase()==="INPUT"&&S(this).attr("type").toLowerCase()==="file"&&s.FileReader;if(!f||!this.files||this.files.length===0)return!0;for(var g=0;g<this.files.length;g++)n.push({file:this.files[g],inputElem:this,instanceConfig:S.extend({},e)})}),o(),this;function o(){if(n.length===0){A(t.complete)&&t.complete();return}var i=n[0];if(A(t.before)){var f=t.before(i.file,i.inputElem);if(typeof f=="object")if(f.action==="abort"){u("AbortError",i.file,i.inputElem,f.reason);return}else if(f.action==="skip"){y();return}else typeof f.config=="object"&&(i.instanceConfig=S.extend(i.instanceConfig,f.config));else if(f==="skip"){y();return}}var g=i.instanceConfig.complete;i.instanceConfig.complete=function(l){A(g)&&g(l,i.file,i.inputElem),y()},a.parse(i.file,i.instanceConfig)}function u(i,f,g,l){A(t.error)&&t.error({name:i},f,g,l)}function y(){n.splice(0,1),o()}}}c&&(s.onmessage=lt);function v(t,e){e=e||{};var n=e.dynamicTyping||!1;if(A(n)&&(e.dynamicTypingFunction=n,n={}),e.dynamicTyping=n,e.transform=A(e.transform)?e.transform:!1,e.worker&&a.WORKERS_SUPPORTED){var o=ot();o.userStep=e.step,o.userChunk=e.chunk,o.userComplete=e.complete,o.userError=e.error,e.step=A(e.step),e.chunk=A(e.chunk),e.complete=A(e.complete),e.error=A(e.error),delete e.worker,o.postMessage({input:t,config:e,workerId:o.id});return}var u=null;if(t===a.NODE_STREAM_INPUT&&typeof PAPA_BROWSER_CONTEXT>"u")return u=new he(e),u.getStream();return typeof t=="string"?(t=y(t),e.download?u=new W(e):u=new Z(e)):t.readable===!0&&A(t.read)&&A(t.on)?u=new de(e):(s.File&&t instanceof File||t instanceof Object)&&(u=new B(e)),u.stream(t);function y(i){return i.charCodeAt(0)===65279?i.slice(1):i}}function R(t,e){var n=!1,o=!0,u=",",y=`\r
+`,i='"',f=i+i,g=!1,l=null,N=!1;re();var p=new RegExp(pe(i),"g");if(typeof t=="string"&&(t=JSON.parse(t)),Array.isArray(t)){if(!t.length||Array.isArray(t[0]))return H(null,t,g);if(typeof t[0]=="object")return H(l||Object.keys(t[0]),t,g)}else if(typeof t=="object")return typeof t.data=="string"&&(t.data=JSON.parse(t.data)),Array.isArray(t.data)&&(t.fields||(t.fields=t.meta&&t.meta.fields||l),t.fields||(t.fields=Array.isArray(t.data[0])?t.fields:typeof t.data[0]=="object"?Object.keys(t.data[0]):[]),!Array.isArray(t.data[0])&&typeof t.data[0]!="object"&&(t.data=[t.data])),H(t.fields||[],t.data||[],g);throw new Error("Unable to serialize unrecognized input");function re(){if(typeof e=="object"){if(typeof e.delimiter=="string"&&!a.BAD_DELIMITERS.filter(function(T){return e.delimiter.indexOf(T)!==-1}).length&&(u=e.delimiter),(typeof e.quotes=="boolean"||typeof e.quotes=="function"||Array.isArray(e.quotes))&&(n=e.quotes),(typeof e.skipEmptyLines=="boolean"||typeof e.skipEmptyLines=="string")&&(g=e.skipEmptyLines),typeof e.newline=="string"&&(y=e.newline),typeof e.quoteChar=="string"&&(i=e.quoteChar),typeof e.header=="boolean"&&(o=e.header),Array.isArray(e.columns)){if(e.columns.length===0)throw new Error("Option columns is empty");l=e.columns}e.escapeChar!==void 0&&(f=e.escapeChar+i),(typeof e.escapeFormulae=="boolean"||e.escapeFormulae instanceof RegExp)&&(N=e.escapeFormulae instanceof RegExp?e.escapeFormulae:/^[=+\-@\t\r].*$/)}}function H(T,q,I){var E="";typeof T=="string"&&(T=JSON.parse(T)),typeof q=="string"&&(q=JSON.parse(q));var J=Array.isArray(T)&&T.length>0,Q=!Array.isArray(q[0]);if(J&&o){for(var G=0;G<T.length;G++)G>0&&(E+=u),E+=w(T[G],G);q.length>0&&(E+=y)}for(var K=0;K<q.length;K++){var ae=J?T.length:q[K].length,oe=!1,ee=J?Object.keys(q[K]).length===0:q[K].length===0;if(I&&!J&&(oe=I==="greedy"?q[K].join("").trim()==="":q[K].length===1&&q[K][0].length===0),I==="greedy"&&J){for(var d=[],k=0;k<ae;k++){var M=Q?T[k]:k;d.push(q[K][M])}oe=d.join("").trim()===""}if(!oe){for(var C=0;C<ae;C++){C>0&&!ee&&(E+=u);var O=J&&Q?T[C]:C;E+=w(q[K][O],C)}K<q.length-1&&(!I||ae>0&&!ee)&&(E+=y)}}return E}function w(T,q){if(typeof T>"u"||T===null)return"";if(T.constructor===Date)return JSON.stringify(T).slice(1,25);var I=!1;N&&typeof T=="string"&&N.test(T)&&(T="'"+T,I=!0);var E=T.toString().replace(p,f);return I=I||n===!0||typeof n=="function"&&n(T,q)||Array.isArray(n)&&n[q]||ie(E,a.BAD_DELIMITERS)||E.indexOf(u)>-1||E.charAt(0)===" "||E.charAt(E.length-1)===" ",I?i+E+i:E}function ie(T,q){for(var I=0;I<q.length;I++)if(T.indexOf(q[I])>-1)return!0;return!1}}function _(t){this._handle=null,this._finished=!1,this._completed=!1,this._halted=!1,this._input=null,this._baseIndex=0,this._partialLine="",this._rowCount=0,this._start=0,this._nextChunk=null,this.isFirstChunk=!0,this._completeResults={data:[],errors:[],meta:{}},e.call(this,t),this.parseChunk=function(n,o){if(this.isFirstChunk&&A(this._config.beforeFirstChunk)){var u=this._config.beforeFirstChunk(n);u!==void 0&&(n=u)}this.isFirstChunk=!1,this._halted=!1;var y=this._partialLine+n;this._partialLine="";var i=this._handle.parse(y,this._baseIndex,!this._finished);if(this._handle.paused()||this._handle.aborted()){this._halted=!0;return}var f=i.meta.cursor;this._finished||(this._partialLine=y.substring(f-this._baseIndex),this._baseIndex=f),i&&i.data&&(this._rowCount+=i.data.length);var g=this._finished||this._config.preview&&this._rowCount>=this._config.preview;if(c)s.postMessage({results:i,workerId:a.WORKER_ID,finished:g});else if(A(this._config.chunk)&&!o){if(this._config.chunk(i,this._handle),this._handle.paused()||this._handle.aborted()){this._halted=!0;return}i=void 0,this._completeResults=void 0}return!this._config.step&&!this._config.chunk&&(this._completeResults.data=this._completeResults.data.concat(i.data),this._completeResults.errors=this._completeResults.errors.concat(i.errors),this._completeResults.meta=i.meta),!this._completed&&g&&A(this._config.complete)&&(!i||!i.meta.aborted)&&(this._config.complete(this._completeResults,this._input),this._completed=!0),!g&&(!i||!i.meta.paused)&&this._nextChunk(),i},this._sendError=function(n){A(this._config.error)?this._config.error(n):c&&this._config.error&&s.postMessage({workerId:a.WORKER_ID,error:n,finished:!1})};function e(n){var o=ye(n);o.chunkSize=parseInt(o.chunkSize),!n.step&&!n.chunk&&(o.chunkSize=null),this._handle=new Pe(o),this._handle.streamer=this,this._config=o}}function W(t){t=t||{},t.chunkSize||(t.chunkSize=a.RemoteChunkSize),_.call(this,t);var e;b?this._nextChunk=function(){this._readChunk(),this._chunkLoaded()}:this._nextChunk=function(){this._readChunk()},this.stream=function(o){this._input=o,this._nextChunk()},this._readChunk=function(){if(this._finished){this._chunkLoaded();return}if(e=new XMLHttpRequest,this._config.withCredentials&&(e.withCredentials=this._config.withCredentials),b||(e.onload=$(this._chunkLoaded,this),e.onerror=$(this._chunkError,this)),e.open(this._config.downloadRequestBody?"POST":"GET",this._input,!b),this._config.downloadRequestHeaders){var o=this._config.downloadRequestHeaders;for(var u in o)e.setRequestHeader(u,o[u])}if(this._config.chunkSize){var y=this._start+this._config.chunkSize-1;e.setRequestHeader("Range","bytes="+this._start+"-"+y)}try{e.send(this._config.downloadRequestBody)}catch(i){this._chunkError(i.message)}b&&e.status===0&&this._chunkError()},this._chunkLoaded=function(){if(e.readyState===4){if(e.status<200||e.status>=400){this._chunkError();return}this._start+=this._config.chunkSize?this._config.chunkSize:e.responseText.length,this._finished=!this._config.chunkSize||this._start>=n(e),this.parseChunk(e.responseText)}},this._chunkError=function(o){var u=e.statusText||o;this._sendError(new Error(u))};function n(o){var u=o.getResponseHeader("Content-Range");return u===null?-1:parseInt(u.substring(u.lastIndexOf("/")+1))}}W.prototype=Object.create(_.prototype),W.prototype.constructor=W;function B(t){t=t||{},t.chunkSize||(t.chunkSize=a.LocalChunkSize),_.call(this,t);var e,n,o=typeof FileReader<"u";this.stream=function(u){this._input=u,n=u.slice||u.webkitSlice||u.mozSlice,o?(e=new FileReader,e.onload=$(this._chunkLoaded,this),e.onerror=$(this._chunkError,this)):e=new FileReaderSync,this._nextChunk()},this._nextChunk=function(){!this._finished&&(!this._config.preview||this._rowCount<this._config.preview)&&this._readChunk()},this._readChunk=function(){var u=this._input;if(this._config.chunkSize){var y=Math.min(this._start+this._config.chunkSize,this._input.size);u=n.call(u,this._start,y)}var i=e.readAsText(u,this._config.encoding);o||this._chunkLoaded({target:{result:i}})},this._chunkLoaded=function(u){this._start+=this._config.chunkSize,this._finished=!this._config.chunkSize||this._start>=this._input.size,this.parseChunk(u.target.result)},this._chunkError=function(){this._sendError(e.error)}}B.prototype=Object.create(_.prototype),B.prototype.constructor=B;function Z(t){t=t||{},_.call(this,t);var e;this.stream=function(n){return e=n,this._nextChunk()},this._nextChunk=function(){if(!this._finished){var n=this._config.chunkSize,o;return n?(o=e.substring(0,n),e=e.substring(n)):(o=e,e=""),this._finished=!e,this.parseChunk(o)}}}Z.prototype=Object.create(Z.prototype),Z.prototype.constructor=Z;function de(t){t=t||{},_.call(this,t);var e=[],n=!0,o=!1;this.pause=function(){_.prototype.pause.apply(this,arguments),this._input.pause()},this.resume=function(){_.prototype.resume.apply(this,arguments),this._input.resume()},this.stream=function(u){this._input=u,this._input.on("data",this._streamData),this._input.on("end",this._streamEnd),this._input.on("error",this._streamError)},this._checkIsFinished=function(){o&&e.length===1&&(this._finished=!0)},this._nextChunk=function(){this._checkIsFinished(),e.length?this.parseChunk(e.shift()):n=!0},this._streamData=$(function(u){try{e.push(typeof u=="string"?u:u.toString(this._config.encoding)),n&&(n=!1,this._checkIsFinished(),this.parseChunk(e.shift()))}catch(y){this._streamError(y)}},this),this._streamError=$(function(u){this._streamCleanUp(),this._sendError(u)},this),this._streamEnd=$(function(){this._streamCleanUp(),o=!0,this._streamData("")},this),this._streamCleanUp=$(function(){this._input.removeListener("data",this._streamData),this._input.removeListener("end",this._streamEnd),this._input.removeListener("error",this._streamError)},this)}de.prototype=Object.create(_.prototype),de.prototype.constructor=de;function he(t){var e=mt("stream").Duplex,n=ye(t),o=!0,u=!1,y=[],i=null;this._onCsvData=function(f){var g=f.data;!i.push(g)&&!this._handle.paused()&&this._handle.pause()},this._onCsvComplete=function(){i.push(null)},n.step=$(this._onCsvData,this),n.complete=$(this._onCsvComplete,this),_.call(this,n),this._nextChunk=function(){u&&y.length===1&&(this._finished=!0),y.length?y.shift()():o=!0},this._addToParseQueue=function(f,g){y.push($(function(){if(this.parseChunk(typeof f=="string"?f:f.toString(n.encoding)),A(g))return g()},this)),o&&(o=!1,this._nextChunk())},this._onRead=function(){this._handle.paused()&&this._handle.resume()},this._onWrite=function(f,g,l){this._addToParseQueue(f,l)},this._onWriteComplete=function(){u=!0,this._addToParseQueue("")},this.getStream=function(){return i},i=new e({readableObjectMode:!0,decodeStrings:!1,read:$(this._onRead,this),write:$(this._onWrite,this)}),i.once("finish",$(this._onWriteComplete,this))}typeof PAPA_BROWSER_CONTEXT>"u"&&(he.prototype=Object.create(_.prototype),he.prototype.constructor=he);function Pe(t){var e=Math.pow(2,53),n=-e,o=/^\s*-?(\d+\.?|\.\d+|\d+\.\d+)([eE][-+]?\d+)?\s*$/,u=/^((\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)))$/,y=this,i=0,f=0,g,l,N=!1,p=!1,re,H=[],w={data:[],errors:[],meta:{}};if(A(t.step)){var ie=t.step;t.step=function(d){if(w=d,E())I();else{if(I(),w.data.length===0)return;i+=d.data.length,t.preview&&i>t.preview?l.abort():(w.data=w.data[0],ie(w,y))}}}this.parse=function(d,k,M){var C=t.quoteChar||'"';if(t.newline||(t.newline=oe(d,C)),re=!1,t.delimiter)A(t.delimiter)&&(t.delimiter=t.delimiter(d),w.meta.delimiter=t.delimiter);else{var O=ae(d,t.newline,t.skipEmptyLines,t.comments,t.delimitersToGuess);O.successful?t.delimiter=O.bestDelimiter:(re=!0,t.delimiter=a.DefaultDelimiter),w.meta.delimiter=t.delimiter}var P=ye(t);return t.preview&&t.header&&P.preview++,g=d,l=new be(P),w=l.parse(g,k,M),I(),N?{meta:{paused:!0}}:w||{meta:{paused:!1}}},this.paused=function(){return N},this.pause=function(){N=!0,l.abort(),g=A(t.chunk)?"":g.substring(l.getCharIndex())},this.resume=function(){y.streamer._halted?(N=!1,y.streamer.parseChunk(g,!0)):setTimeout(y.resume,3)},this.aborted=function(){return p},this.abort=function(){p=!0,l.abort(),w.meta.aborted=!0,A(t.complete)&&t.complete(w),g=""};function T(d){return t.skipEmptyLines==="greedy"?d.join("").trim()==="":d.length===1&&d[0].length===0}function q(d){if(o.test(d)){var k=parseFloat(d);if(k>n&&k<e)return!0}return!1}function I(){return w&&re&&(ee("Delimiter","UndetectableDelimiter","Unable to auto-detect delimiting character; defaulted to '"+a.DefaultDelimiter+"'"),re=!1),t.skipEmptyLines&&(w.data=w.data.filter(function(d){return!T(d)})),E()&&J(),K()}function E(){return t.header&&H.length===0}function J(){if(!w)return;function d(M,C){A(t.transformHeader)&&(M=t.transformHeader(M,C)),H.push(M)}if(Array.isArray(w.data[0])){for(var k=0;E()&&k<w.data.length;k++)w.data[k].forEach(d);w.data.splice(0,1)}else w.data.forEach(d)}function Q(d){return t.dynamicTypingFunction&&t.dynamicTyping[d]===void 0&&(t.dynamicTyping[d]=t.dynamicTypingFunction(d)),(t.dynamicTyping[d]||t.dynamicTyping)===!0}function G(d,k){return Q(d)?k==="true"||k==="TRUE"?!0:k==="false"||k==="FALSE"?!1:q(k)?parseFloat(k):u.test(k)?new Date(k):k===""?null:k:k}function K(){if(!w||!t.header&&!t.dynamicTyping&&!t.transform)return w;function d(M,C){var O=t.header?{}:[],P;for(P=0;P<M.length;P++){var z=P,F=M[P];t.header&&(z=P>=H.length?"__parsed_extra":H[P]),t.transform&&(F=t.transform(F,z)),F=G(z,F),z==="__parsed_extra"?(O[z]=O[z]||[],O[z].push(F)):O[z]=F}return t.header&&(P>H.length?ee("FieldMismatch","TooManyFields","Too many fields: expected "+H.length+" fields but parsed "+P,f+C):P<H.length&&ee("FieldMismatch","TooFewFields","Too few fields: expected "+H.length+" fields but parsed "+P,f+C)),O}var k=1;return!w.data.length||Array.isArray(w.data[0])?(w.data=w.data.map(d),k=w.data.length):w.data=d(w.data,0),t.header&&w.meta&&(w.meta.fields=H),f+=k,w}function ae(d,k,M,C,O){var P,z,F,ne;O=O||[",","	","|",";",a.RECORD_SEP,a.UNIT_SEP];for(var U=0;U<O.length;U++){var j=O[U],ce=0,x=0,we=0;F=void 0;for(var fe=new be({comments:C,delimiter:j,newline:k,preview:10}).parse(d),ue=0;ue<fe.data.length;ue++){if(M&&T(fe.data[ue])){we++;continue}var se=fe.data[ue].length;if(x+=se,typeof F>"u"){F=se;continue}else se>0&&(ce+=Math.abs(se-F),F=se)}fe.data.length>0&&(x/=fe.data.length-we),(typeof z>"u"||ce<=z)&&(typeof ne>"u"||x>ne)&&x>1.99&&(z=ce,P=j,ne=x)}return t.delimiter=P,{successful:!!P,bestDelimiter:P}}function oe(d,k){d=d.substring(0,1024*1024);var M=new RegExp(pe(k)+"([^]*?)"+pe(k),"gm");d=d.replace(M,"");var C=d.split("\r"),O=d.split(`
+`),P=O.length>1&&O[0].length<C[0].length;if(C.length===1||P)return`
+`;for(var z=0,F=0;F<C.length;F++)C[F][0]===`
+`&&z++;return z>=C.length/2?`\r
+`:"\r"}function ee(d,k,M,C){var O={type:d,code:k,message:M};C!==void 0&&(O.row=C),w.errors.push(O)}}function pe(t){return t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function be(t){t=t||{};var e=t.delimiter,n=t.newline,o=t.comments,u=t.step,y=t.preview,i=t.fastMode,f;t.quoteChar===void 0||t.quoteChar===null?f='"':f=t.quoteChar;var g=f;if(t.escapeChar!==void 0&&(g=t.escapeChar),(typeof e!="string"||a.BAD_DELIMITERS.indexOf(e)>-1)&&(e=","),o===e)throw new Error("Comment character same as delimiter");o===!0?o="#":(typeof o!="string"||a.BAD_DELIMITERS.indexOf(o)>-1)&&(o=!1),n!==`
+`&&n!=="\r"&&n!==`\r
+`&&(n=`
+`);var l=0,N=!1;this.parse=function(p,re,H){if(typeof p!="string")throw new Error("Input must be a string");var w=p.length,ie=e.length,T=n.length,q=o.length,I=A(u);l=0;var E=[],J=[],Q=[],G=0;if(!p)return X();if(t.header&&!re){var K=p.split(n)[0],ae=K.split(e),oe="_",ee=[],d={},k=!1;for(var M in ae){var C=ae[M];A(t.transformHeader)&&(C=t.transformHeader(C,M));var O=C,P=d[C]||0;for(P>0&&(k=!0,O=C+oe+P),d[C]=P+1;ee.includes(O);)O=O+oe+P;ee.push(O)}if(k){var z=p.split(n);z[0]=ee.join(e),p=z.join(n)}}if(i||i!==!1&&p.indexOf(f)===-1){for(var F=p.split(n),ne=0;ne<F.length;ne++){if(Q=F[ne],l+=Q.length,ne!==F.length-1)l+=n.length;else if(H)return X();if(!(o&&Q.substring(0,q)===o)){if(I){if(E=[],ke(Q.split(e)),ge(),N)return X()}else ke(Q.split(e));if(y&&ne>=y)return E=E.slice(0,y),X(!0)}}return X()}for(var U=p.indexOf(e,l),j=p.indexOf(n,l),ce=new RegExp(pe(g)+pe(f),"g"),x=p.indexOf(f,l);;){if(p[l]===f){for(x=l,l++;;){if(x=p.indexOf(f,x+1),x===-1)return H||J.push({type:"Quotes",code:"MissingQuotes",message:"Quoted field unterminated",row:E.length,index:l}),Re();if(x===w-1){var we=p.substring(l,x).replace(ce,f);return Re(we)}if(f===g&&p[x+1]===g){x++;continue}if(!(f!==g&&x!==0&&p[x-1]===g)){U!==-1&&U<x+1&&(U=p.indexOf(e,x+1)),j!==-1&&j<x+1&&(j=p.indexOf(n,x+1));var fe=j===-1?U:Math.min(U,j),ue=Fe(fe);if(p.substr(x+1+ue,ie)===e){Q.push(p.substring(l,x).replace(ce,f)),l=x+1+ue+ie,p[x+1+ue+ie]!==f&&(x=p.indexOf(f,l)),U=p.indexOf(e,l),j=p.indexOf(n,l);break}var se=Fe(j);if(p.substring(x+1+se,x+1+se+T)===n){if(Q.push(p.substring(l,x).replace(ce,f)),Le(x+1+se+T),U=p.indexOf(e,l),x=p.indexOf(f,l),I&&(ge(),N))return X();if(y&&E.length>=y)return X(!0);break}J.push({type:"Quotes",code:"InvalidQuotes",message:"Trailing quote on quoted field is malformed",row:E.length,index:l}),x++}}continue}if(o&&Q.length===0&&p.substring(l,l+q)===o){if(j===-1)return X();l=j+T,j=p.indexOf(n,l),U=p.indexOf(e,l);continue}if(U!==-1&&(U<j||j===-1)){Q.push(p.substring(l,U)),l=U+ie,U=p.indexOf(e,l);continue}if(j!==-1){if(Q.push(p.substring(l,j)),Le(j+T),I&&(ge(),N))return X();if(y&&E.length>=y)return X(!0);continue}break}return Re();function ke(Y){E.push(Y),G=l}function Fe(Y){var Qe=0;if(Y!==-1){var Te=p.substring(x+1,Y);Te&&Te.trim()===""&&(Qe=Te.length)}return Qe}function Re(Y){return H||(typeof Y>"u"&&(Y=p.substring(l)),Q.push(Y),l=w,ke(Q),I&&ge()),X()}function Le(Y){l=Y,ke(Q),Q=[],j=p.indexOf(n,l)}function X(Y){return{data:E,errors:J,meta:{delimiter:e,linebreak:n,aborted:N,truncated:!!Y,cursor:G+(re||0)}}}function ge(){u(X()),E=[],J=[]}},this.abort=function(){N=!0},this.getCharIndex=function(){return l}}function ot(){if(!a.WORKERS_SUPPORTED)return!1;var t=h(),e=new s.Worker(t);return e.onmessage=ut,e.id=L++,m[e.id]=e,e}function ut(t){var e=t.data,n=m[e.workerId],o=!1;if(e.error)n.userError(e.error,e.file);else if(e.results&&e.results.data){var u=function(){o=!0,De(e.workerId,{data:[],errors:[],meta:{aborted:!0}})},y={abort:u,pause:Ie,resume:Ie};if(A(n.userStep)){for(var i=0;i<e.results.data.length&&(n.userStep({data:e.results.data[i],errors:e.results.errors,meta:e.results.meta},y),!o);i++);delete e.results}else A(n.userChunk)&&(n.userChunk(e.results,y,e.file),delete e.results)}e.finished&&!o&&De(e.workerId,e.results)}function De(t,e){var n=m[t];A(n.userComplete)&&n.userComplete(e),n.terminate(),delete m[t]}function Ie(){throw new Error("Not implemented.")}function lt(t){var e=t.data;if(typeof a.WORKER_ID>"u"&&e&&(a.WORKER_ID=e.workerId),typeof e.input=="string")s.postMessage({workerId:a.WORKER_ID,results:a.parse(e.input,e.config),finished:!0});else if(s.File&&e.input instanceof File||e.input instanceof Object){var n=a.parse(e.input,e.config);n&&s.postMessage({workerId:a.WORKER_ID,results:n,finished:!0})}}function ye(t){if(typeof t!="object"||t===null)return t;var e=Array.isArray(t)?[]:{};for(var n in t)e[n]=ye(t[n]);return e}function $(t,e){return function(){t.apply(e,arguments)}}function A(t){return typeof t=="function"}return a})});import{createApp as Jt}from"vue";import{defineComponent as _t}from"vue";var D=({templateRoot:r,dataInjects:s,templateInjects:h,templateReplaces:b,withVModel:c,withAttrs:m,shouldSkipRoot:L})=>{let a=r.startsWith(".")||r.startsWith("#")?r:`[data-bdtl="${r}"]`,S=document.querySelector(a);if(!S)return"";let v=S.cloneNode(!0);return s&&Object.entries(s).forEach(([R,_])=>{v.querySelectorAll(`[data-bdtl="${R}"]`).forEach(B=>{B.textContent=`{{${_}}}`})}),h&&Object.entries(h).forEach(([R,_])=>{if(R==="&"){v.innerHTML=_;return}if(R.startsWith(".")||R.startsWith("#")){v.querySelectorAll(R).forEach(Z=>{Z.innerHTML=_});return}v.querySelectorAll(`[data-bdtl="${R}"]`).forEach(B=>{B.innerHTML=_})}),b&&Object.entries(b).forEach(([R,_])=>{if(R==="&"){v.outerHTML=_;return}if(R.startsWith(".")||R.startsWith("#")){v.querySelectorAll(R).forEach(Z=>{Z.outerHTML=_});return}v.querySelectorAll(`[data-bdtl="${R}"]`).forEach(B=>{B.outerHTML=_})}),c&&Object.entries(c).forEach(([R,_])=>{let W=v.querySelector(`[data-bdtl="${R}"]`);W&&W.setAttribute("v-model",_)}),m&&Object.entries(m).forEach(([R,_])=>{let W=v.querySelector(`[data-bdtl="${R}"]`);W&&Object.entries(_).forEach(([B,Z])=>{W.setAttribute(B,Z)})}),L?v.innerHTML:v.outerHTML};import{defineComponent as xe}from"vue";var Ce=r=>xe({template:D({templateRoot:`track-point--${r}`,dataInjects:{"track-point__number":"number","track-point__name":"name"}}),props:{number:{type:String,required:!0},name:{type:String,required:!0}}}),kt=Ce("open"),gt=Ce("current"),bt=Ce("done"),je=r=>xe({template:D({templateRoot:`track-track--${r}`})}),Rt=je("open"),Tt=je("done"),We=xe({template:`
     <template v-if="withTrack">
       <track-track-open v-if="withTrack === 'open'" />
       <track-track-done v-if="withTrack === 'done'" />
@@ -143,183 +29,7 @@ var TrackPoint_default = defineComponent({
       :name="trackPoint.name"
       @click.native="$emit('click')"
     />
-  `
-  ),
-  emits: ["click"],
-  props: {
-    trackPoint: {
-      type: Object,
-      required: true
-    },
-    withTrack: {
-      type: String,
-      required: false
-    }
-  },
-  components: {
-    TrackPointOpen,
-    TrackPointCurrent,
-    TrackPointDone,
-    TrackTrackOpen,
-    TrackTrackDone
-  },
-  setup(props) {
-    return {};
-  }
-});
-
-// src/data/trackPoints.ts
-import { computed as computed2 } from "vue";
-
-// src/data/questions.ts
-import { computed, ref } from "vue";
-var getWeightedText = (textRaw, defaultWeight = 0) => {
-  const [, weightRaw, text] = textRaw.match(/\[([-+]?\d+)\](.*)/m) || [];
-  const weight = parseInt(weightRaw || "") || defaultWeight;
-  return { weight, text: text || textRaw };
-};
-var getQuestionsData = () => {
-  const questionElements = document.querySelectorAll('[data-bdtl="question"]');
-  const questionsData = [...questionElements].map((element) => {
-    const titleRaw = element.querySelector('[data-bdtl="question__title"]')?.textContent?.trim() || "";
-    const { weight, text: title } = getWeightedText(titleRaw, 1);
-    const question = element.querySelector('[data-bdtl="question__question"]')?.textContent?.trim() || "";
-    const answerElements = element.querySelectorAll('[data-bdtl="answer"]');
-    const answers = [...answerElements].map((element2) => {
-      const labelRaw = element2.querySelector('[data-bdtl="answer__label"]')?.textContent?.trim() || "";
-      const { weight: weight2, text: label } = getWeightedText(labelRaw);
-      return {
-        label: label || labelRaw,
-        value: null,
-        weight: weight2
-      };
-    });
-    return {
-      title,
-      question,
-      weight,
-      answers
-    };
-  });
-  return questionsData;
-};
-var allQuestions = getQuestionsData();
-var currentQuestionIndex = ref(0);
-var currentAnswers = ref({});
-var isNegativeAnswer = (answer) => {
-  return answer.weight < 0;
-};
-var deactivateOppositeAnswers = ({
-  questionIndex,
-  answerIndex
-}) => {
-  const answers = allQuestions[questionIndex]?.answers;
-  const checkedAnswer = answers?.[answerIndex];
-  if (!checkedAnswer)
-    return;
-  answers.forEach((answer, index) => {
-    if (isNegativeAnswer(answer) === isNegativeAnswer(checkedAnswer)) {
-      return;
-    }
-    currentAnswers.value[questionIndex] = {
-      ...currentAnswers.value[questionIndex],
-      [index]: false
-    };
-  });
-};
-var useQuestions = () => {
-  const allQuestionsComputed = computed(
-    () => allQuestions.map((question, questionIndex) => {
-      return {
-        ...question,
-        answers: question.answers.map((answer, answerIndex) => {
-          return {
-            ...answer,
-            value: currentAnswers.value[questionIndex]?.[answerIndex] ?? null
-          };
-        })
-      };
-    })
-  );
-  const currentQuestionIndexComputed = computed(
-    () => currentQuestionIndex.value
-  );
-  const currentQuestion = computed(() => {
-    return allQuestionsComputed.value[currentQuestionIndex.value];
-  });
-  const incrementCurrentQuestionIndex = () => {
-    currentQuestionIndex.value = (currentQuestionIndex.value + 1) % allQuestionsComputed.value.length;
-  };
-  const decrementCurrentQuestionIndex = () => {
-    const newIndex = currentQuestionIndex.value - 1;
-    if (newIndex < 0) {
-      currentQuestionIndex.value = allQuestionsComputed.value.length - 1;
-      return;
-    }
-    currentQuestionIndex.value = newIndex % allQuestionsComputed.value.length;
-  };
-  const setCurrentQuestionIndex = (index) => {
-    currentQuestionIndex.value = Math.abs(index) % allQuestionsComputed.value.length;
-  };
-  const setCurrentQuestionAnswer = (index, value) => {
-    deactivateOppositeAnswers({
-      questionIndex: currentQuestionIndex.value,
-      answerIndex: index
-    });
-    currentAnswers.value[currentQuestionIndex.value] = {
-      ...currentAnswers.value[currentQuestionIndex.value],
-      [index]: value
-    };
-  };
-  const isFirstQuestion = computed(() => currentQuestionIndex.value === 0);
-  const isLastQuestion = computed(
-    () => currentQuestionIndex.value === allQuestionsComputed.value.length - 1
-  );
-  return {
-    allQuestions: allQuestionsComputed,
-    currentQuestionIndex: currentQuestionIndexComputed,
-    currentQuestion,
-    incrementCurrentQuestionIndex,
-    decrementCurrentQuestionIndex,
-    setCurrentQuestionIndex,
-    setCurrentQuestionAnswer,
-    isFirstQuestion,
-    isLastQuestion
-  };
-};
-
-// src/data/trackPoints.ts
-var useTrackPoints = () => {
-  const { allQuestions: allQuestions2, currentQuestionIndex: currentQuestionIndex2 } = useQuestions();
-  const isQuestionDone = (questionIndex) => {
-    const questionAnswers = allQuestions2.value[questionIndex]?.answers;
-    if (!questionAnswers) {
-      return false;
-    }
-    return Object.values(questionAnswers).some(({ value }) => value);
-  };
-  const trackPoints = computed2(() => {
-    return allQuestions2.value.map((question, questionIndex) => {
-      return {
-        number: String(questionIndex + 1),
-        name: question.title,
-        status: currentQuestionIndex2.value === questionIndex ? "current" : isQuestionDone(questionIndex) ? "done" : "open"
-      };
-    });
-  });
-  return {
-    trackPoints
-  };
-};
-
-// src/components/TrackRoot.ts
-var TrackRoot_default = defineComponent2({
-  template: getTemplate({
-    templateRoot: "track-root",
-    templateInjects: {
-      "&": (
-        /* html */
-        `
+  `,emits:["click"],props:{trackPoint:{type:Object,required:!0},withTrack:{type:String,required:!1}},components:{TrackPointOpen:kt,TrackPointCurrent:gt,TrackPointDone:bt,TrackTrackOpen:Rt,TrackTrackDone:Tt},setup(r){return{}}});import{computed as Et}from"vue";import{computed as me,ref as Ue}from"vue";var ze=(r,s=0)=>{let[,h,b]=r.match(/\[([-+]?\d+)\](.*)/m)||[];return{weight:parseInt(h||"")||s,text:b||r}},xt=()=>[...document.querySelectorAll('[data-bdtl="question"]')].map(h=>{let b=h.querySelector('[data-bdtl="question__title"]')?.textContent?.trim()||"",{weight:c,text:m}=ze(b,1),L=h.querySelector('[data-bdtl="question__question"]')?.textContent?.trim()||"",S=[...h.querySelectorAll('[data-bdtl="answer"]')].map(v=>{let R=v.querySelector('[data-bdtl="answer__label"]')?.textContent?.trim()||"",{weight:_,text:W}=ze(R);return{label:W||R,value:null,weight:_}});return{title:m,question:L,weight:c,answers:S}}),Be=xt(),V=Ue(0),ve=Ue({}),He=r=>r.weight<0,Ct=({questionIndex:r,answerIndex:s})=>{let h=Be[r]?.answers,b=h?.[s];b&&h.forEach((c,m)=>{He(c)!==He(b)&&(ve.value[r]={...ve.value[r],[m]:!1})})},te=()=>{let r=me(()=>Be.map((v,R)=>({...v,answers:v.answers.map((_,W)=>({..._,value:ve.value[R]?.[W]??null}))}))),s=me(()=>V.value),h=me(()=>r.value[V.value]),b=()=>{V.value=(V.value+1)%r.value.length},c=()=>{let v=V.value-1;if(v<0){V.value=r.value.length-1;return}V.value=v%r.value.length},m=v=>{V.value=Math.abs(v)%r.value.length},L=(v,R)=>{Ct({questionIndex:V.value,answerIndex:v}),ve.value[V.value]={...ve.value[V.value],[v]:R}},a=me(()=>V.value===0),S=me(()=>V.value===r.value.length-1);return{allQuestions:r,currentQuestionIndex:s,currentQuestion:h,incrementCurrentQuestionIndex:b,decrementCurrentQuestionIndex:c,setCurrentQuestionIndex:m,setCurrentQuestionAnswer:L,isFirstQuestion:a,isLastQuestion:S}};var Ke=()=>{let{allQuestions:r,currentQuestionIndex:s}=te(),h=c=>{let m=r.value[c]?.answers;return m?Object.values(m).some(({value:L})=>L):!1};return{trackPoints:Et(()=>r.value.map((c,m)=>({number:String(m+1),name:c.title,status:s.value===m?"current":h(m)?"done":"open"})))}};var $e=_t({template:D({templateRoot:"track-root",templateInjects:{"&":`
         <template v-for="(trackPoint, index) in trackPoints">
           <track-point 
             :track-point="trackPoint" 
@@ -327,93 +37,7 @@ var TrackRoot_default = defineComponent2({
             @click="setCurrentQuestionIndex(index)"
           />
         </template>
-      `
-      )
-    }
-  }),
-  setup() {
-    const { trackPoints } = useTrackPoints();
-    const { setCurrentQuestionIndex } = useQuestions();
-    const isTrackDone = (index) => trackPoints.value.slice(0, index + 1).every(
-      (trackPoint) => trackPoint.status === "done" || trackPoint.status === "current"
-    );
-    const isFirstTrackPoint = (index) => index === 0;
-    return {
-      isTrackDone,
-      isFirstTrackPoint,
-      trackPoints,
-      setCurrentQuestionIndex
-    };
-  },
-  components: {
-    TrackPoint: TrackPoint_default
-  }
-});
-
-// src/components/QuestionRoot.ts
-import { computed as computed6, defineComponent as defineComponent6 } from "vue";
-
-// src/components/Question.ts
-import { computed as computed4, defineComponent as defineComponent4, toRefs } from "vue";
-
-// src/components/Answer.ts
-import { defineComponent as defineComponent3, computed as computed3 } from "vue";
-var Answer_default = defineComponent3({
-  template: getTemplate({
-    templateRoot: "answer",
-    dataInjects: {
-      answer__label: "label"
-    },
-    withVModel: {
-      answer__checkbox: "value"
-    },
-    withAttrs: {
-      answer__checkbox: {
-        ":id": "id"
-      },
-      answer__label: {
-        ":for": "id"
-      }
-    }
-  }),
-  props: {
-    label: {
-      type: String,
-      required: true
-    },
-    modelValue: {
-      type: [Boolean]
-    }
-  },
-  emits: ["update:model-value"],
-  setup(props, { emit }) {
-    const value = computed3({
-      get() {
-        return props.modelValue;
-      },
-      set(value2) {
-        emit("update:model-value", value2);
-      }
-    });
-    return {
-      value,
-      id: `answer-${Math.random().toString(36).substr(2, 9)}`
-    };
-  }
-});
-
-// src/components/Question.ts
-var Question_default = defineComponent4({
-  template: getTemplate({
-    templateRoot: "question",
-    dataInjects: {
-      question__title: "title",
-      question__question: "question"
-    },
-    templateInjects: {
-      "answer-root": (
-        /* html */
-        `
+      `}}),setup(){let{trackPoints:r}=Ke(),{setCurrentQuestionIndex:s}=te();return{isTrackDone:c=>r.value.slice(0,c+1).every(m=>m.status==="done"||m.status==="current"),isFirstTrackPoint:c=>c===0,trackPoints:r,setCurrentQuestionIndex:s}},components:{TrackPoint:We}});import{computed as Lt,defineComponent as Qt}from"vue";import{computed as Ee,defineComponent as Ot,toRefs as qt}from"vue";import{defineComponent as St,computed as At}from"vue";var Ne=St({template:D({templateRoot:"answer",dataInjects:{answer__label:"label"},withVModel:{answer__checkbox:"value"},withAttrs:{answer__checkbox:{":id":"id"},answer__label:{":for":"id"}}}),props:{label:{type:String,required:!0},modelValue:{type:[Boolean]}},emits:["update:model-value"],setup(r,{emit:s}){return{value:At({get(){return r.modelValue},set(b){s("update:model-value",b)}}),id:`answer-${Math.random().toString(36).substr(2,9)}`}}});var Je=Ot({template:D({templateRoot:"question",dataInjects:{question__title:"title",question__question:"question"},templateInjects:{"answer-root":`
         <answer
           v-for="(answer, index) in answers"
           :key="index"
@@ -421,93 +45,10 @@ var Question_default = defineComponent4({
           :model-value="answer.value"
           @update:model-value="$emit('update:answer', { index, value: $event })"
         />
-      `
-      )
-    }
-  }),
-  props: {
-    question: {
-      type: Object,
-      required: true
-    }
-  },
-  components: {
-    Answer: Answer_default
-  },
-  emits: ["update:answer"],
-  setup(props) {
-    const { question } = toRefs(props);
-    return {
-      title: computed4(() => question.value.title),
-      question: computed4(() => question.value.question),
-      answers: computed4(() => question.value.answers)
-    };
-  }
-});
-
-// src/components/QuestionArrow.ts
-import { computed as computed5, defineComponent as defineComponent5, toRefs as toRefs2 } from "vue";
-var QuestionArrowLeft = defineComponent5({
-  template: getTemplate({
-    templateRoot: "question-arrow--left"
-  })
-});
-var QuestionArrowRight = defineComponent5({
-  template: getTemplate({
-    templateRoot: "question-arrow--right"
-  })
-});
-var QuestionArrow_default = defineComponent5({
-  template: (
-    /* html */
-    `
+      `}}),props:{question:{type:Object,required:!0}},components:{Answer:Ne},emits:["update:answer"],setup(r){let{question:s}=qt(r);return{title:Ee(()=>s.value.title),question:Ee(()=>s.value.question),answers:Ee(()=>s.value.answers)}}});import{computed as Pt,defineComponent as _e,toRefs as Dt}from"vue";var It=_e({template:D({templateRoot:"question-arrow--left"})}),Ft=_e({template:D({templateRoot:"question-arrow--right"})}),Xe=_e({template:`
     <question-arrow-left v-if="direction === 'left'" @click.native="handleClick" :style="style" />
     <question-arrow-right v-if="direction === 'right'" @click.native="handleClick" :style="style" />
-  `
-  ),
-  emits: ["click"],
-  props: {
-    direction: {
-      type: String,
-      required: true
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  components: {
-    QuestionArrowLeft,
-    QuestionArrowRight
-  },
-  setup(props, { emit }) {
-    const { disabled } = toRefs2(props);
-    const style2 = computed5(
-      () => disabled.value ? {
-        cursor: "not-allowed",
-        opacity: 0.5
-      } : {}
-    );
-    const handleClick = () => {
-      if (disabled.value)
-        return;
-      emit("click");
-    };
-    return {
-      style: style2,
-      handleClick
-    };
-  }
-});
-
-// src/components/QuestionRoot.ts
-var QuestionRoot_default = defineComponent6({
-  template: getTemplate({
-    templateRoot: "question-root",
-    templateInjects: {
-      "question-container": (
-        /* html */
-        `
+  `,emits:["click"],props:{direction:{type:String,required:!0},disabled:{type:Boolean,default:!1}},components:{QuestionArrowLeft:It,QuestionArrowRight:Ft},setup(r,{emit:s}){let{disabled:h}=Dt(r);return{style:Pt(()=>h.value?{cursor:"not-allowed",opacity:.5}:{}),handleClick:()=>{h.value||s("click")}}}});var Ve=Qt({template:D({templateRoot:"question-root",templateInjects:{"question-container":`
         <Transition 
           mode="out-in"
           class="duration-300"
@@ -518,60 +59,11 @@ var QuestionRoot_default = defineComponent6({
         >
           <question :question="currentQuestion" :key="currentQuestionKey" @update:answer="setCurrentQuestionAnswer($event.index, $event.value)"/>
         </Transition>
-      `
-      )
-    },
-    templateReplaces: {
-      "question-arrow--left": (
-        /* html */
-        `
+      `},templateReplaces:{"question-arrow--left":`
         <question-arrow direction="left" @click="onArrowLeft" :disabled="isFirstQuestion" />
-      `
-      ),
-      "question-arrow--right": (
-        /* html */
-        `
+      `,"question-arrow--right":`
         <question-arrow direction="right" @click="onArrowRight" :disabled="isLastQuestion" />
-      `
-      )
-    }
-  }),
-  props: {},
-  setup() {
-    const {
-      currentQuestion,
-      incrementCurrentQuestionIndex,
-      decrementCurrentQuestionIndex,
-      setCurrentQuestionAnswer,
-      isFirstQuestion,
-      isLastQuestion
-    } = useQuestions();
-    const onArrowLeft = async () => {
-      decrementCurrentQuestionIndex();
-    };
-    const onArrowRight = async () => {
-      incrementCurrentQuestionIndex();
-    };
-    const currentQuestionKey = computed6(() => {
-      return currentQuestion.value?.title || "";
-    });
-    return {
-      currentQuestion,
-      currentQuestionKey,
-      onArrowLeft,
-      onArrowRight,
-      setCurrentQuestionAnswer,
-      isFirstQuestion,
-      isLastQuestion
-    };
-  },
-  components: {
-    Question: Question_default,
-    QuestionArrow: QuestionArrow_default
-  }
-});
-var style = document.createElement("style");
-style.textContent = `
+      `}}),props:{},setup(){let{currentQuestion:r,incrementCurrentQuestionIndex:s,decrementCurrentQuestionIndex:h,setCurrentQuestionAnswer:b,isFirstQuestion:c,isLastQuestion:m}=te(),L=async()=>{h()},a=async()=>{s()},S=Lt(()=>r.value?.title||"");return{currentQuestion:r,currentQuestionKey:S,onArrowLeft:L,onArrowRight:a,setCurrentQuestionAnswer:b,isFirstQuestion:c,isLastQuestion:m}},components:{Question:Je,QuestionArrow:Xe}}),Ze=document.createElement("style");Ze.textContent=`
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -583,178 +75,29 @@ style.textContent = `
 .opacity-100 {
   opacity: 1;
 }
-`;
-document.head.appendChild(style);
-
-// src/components/EvaluationRoot.ts
-import { computed as computed8, defineComponent as defineComponent8 } from "vue";
-
-// src/components/EvaluationPoint.ts
-import { defineComponent as defineComponent7 } from "vue";
-
-// src/data/evaluation.ts
-import { computed as computed7 } from "vue";
-var getEvaluationData = () => {
-  const evaluationTextRaw = document.querySelector('[data-bdtl="evaluation-text"]')?.textContent || "";
-  const evaluationTexts2 = evaluationTextRaw.split("|").map((text) => text.trim());
-  return evaluationTexts2;
-};
-var evaluationTexts = getEvaluationData();
-var MULTI_SELECT_FACTOR = 0.75;
-var calculateScoreOfSelectedAnswers = (answers) => {
-  const checkedAnswers = answers.filter((answer) => answer.value);
-  const factor = checkedAnswers.length > 1 ? MULTI_SELECT_FACTOR : 1;
-  const scoreRaw = checkedAnswers.reduce((score, answer) => {
-    return score + answer.weight;
-  }, 0);
-  return scoreRaw * factor;
-};
-var calculateScoreOfMaxAnswers = (answers) => {
-  const positiveAnswers = answers.filter((answer) => answer.weight > 0);
-  const factor = positiveAnswers.length > 1 ? MULTI_SELECT_FACTOR : 1;
-  const scoreRaw = positiveAnswers.reduce((score, answer) => {
-    return score + answer.weight;
-  }, 0);
-  return scoreRaw * factor;
-};
-var calculateScoreOfMinAnswers = (answers) => {
-  const negativeAnswers = answers.filter((answer) => answer.weight < 0);
-  const factor = negativeAnswers.length > 1 ? MULTI_SELECT_FACTOR : 1;
-  const scoreRaw = negativeAnswers.reduce((score, answer) => {
-    return score + answer.weight;
-  }, 0);
-  return scoreRaw * factor;
-};
-var useEvaluation = () => {
-  const { allQuestions: allQuestions2 } = useQuestions();
-  const score = computed7(() => {
-    const currentScore = allQuestions2.value.reduce((score2, question) => {
-      const questionScore = calculateScoreOfSelectedAnswers(question.answers);
-      return score2 + questionScore * question.weight;
-    }, 0);
-    const maxScore = allQuestions2.value.reduce((score2, question) => {
-      const questionScore = calculateScoreOfMaxAnswers(question.answers);
-      return score2 + questionScore * question.weight;
-    }, 0);
-    const minScore = allQuestions2.value.reduce((score2, question) => {
-      const questionScore = calculateScoreOfMinAnswers(question.answers);
-      return score2 + questionScore * question.weight;
-    }, 0);
-    return currentScore >= 0 ? 50 + currentScore / maxScore * 50 : 50 - currentScore / minScore * 50;
-  });
-  const evaluationText = computed7(() => {
-    const evaluationTextIndex = Math.floor(
-      score.value * 0.01 * (evaluationTexts.length - 1e-6)
-    );
-    return evaluationTexts[evaluationTextIndex];
-  });
-  const isFinished = computed7(() => {
-    return allQuestions2.value.every(
-      (question) => question.answers.some((answer) => answer.value)
-    );
-  });
-  return {
-    score,
-    evaluationText,
-    isFinished
-  };
-};
-
-// src/components/EvaluationPoint.ts
-var EvaluationPoint_default = defineComponent7({
-  template: getTemplate({
-    templateRoot: "evaluation-point",
-    dataInjects: {
-      "evaluation-text": "evaluationText"
-    }
-  }),
-  components: {},
-  setup() {
-    const { evaluationText } = useEvaluation();
-    return {
-      evaluationText
-    };
-  }
-});
-
-// src/components/EvaluationRoot.ts
-var EvaluationRoot_default = defineComponent8({
-  template: getTemplate({
-    templateRoot: "evaluation-root",
-    templateReplaces: {
-      "evaluation-point": (
-        /* html */
-        `
+`;document.head.appendChild(Ze);import{computed as Ut,defineComponent as Bt}from"vue";import{defineComponent as Ht}from"vue";import{computed as Se}from"vue";var Mt=()=>(document.querySelector('[data-bdtl="evaluation-text"]')?.textContent||"").split("|").map(h=>h.trim()),Ye=Mt(),Ae=.75,jt=r=>{let s=r.filter(c=>c.value),h=s.length>1?Ae:1;return s.reduce((c,m)=>c+m.weight,0)*h},Wt=r=>{let s=r.filter(c=>c.weight>0),h=s.length>1?Ae:1;return s.reduce((c,m)=>c+m.weight,0)*h},zt=r=>{let s=r.filter(c=>c.weight<0),h=s.length>1?Ae:1;return s.reduce((c,m)=>c+m.weight,0)*h},le=()=>{let{allQuestions:r}=te(),s=Se(()=>{let c=r.value.reduce((a,S)=>{let v=jt(S.answers);return a+v*S.weight},0),m=r.value.reduce((a,S)=>{let v=Wt(S.answers);return a+v*S.weight},0),L=r.value.reduce((a,S)=>{let v=zt(S.answers);return a+v*S.weight},0);return c>=0?50+c/m*50:50-c/L*50}),h=Se(()=>{let c=Math.floor(s.value*.01*(Ye.length-1e-6));return Ye[c]}),b=Se(()=>r.value.every(c=>c.answers.some(m=>m.value)));return{score:s,evaluationText:h,isFinished:b}};var Ge=Ht({template:D({templateRoot:"evaluation-point",dataInjects:{"evaluation-text":"evaluationText"}}),components:{},setup(){let{evaluationText:r}=le();return{evaluationText:r}}});var et=Bt({template:D({templateRoot:"evaluation-root",templateReplaces:{"evaluation-point":`
         <evaluation-point :style="style" />
-      `
-      )
-    }
-  }),
-  components: {
-    EvaluationPoint: EvaluationPoint_default
-  },
-  setup() {
-    const { score } = useEvaluation();
-    const style2 = computed8(() => ({
-      left: `${score.value}%`
-    }));
-    return {
-      style: style2
-    };
-  }
-});
-
-// src/components/FinishRoot.ts
-import { defineComponent as defineComponent9 } from "vue";
-var FinishRoot_default = defineComponent9({
-  template: getTemplate({
-    templateRoot: "finish-root"
-  })
-});
-
-// src/index.ts
-createApp({
-  template: getTemplate({
-    templateRoot: "#bdtl-app",
-    shouldSkipRoot: true,
-    templateReplaces: {
-      "track-root": (
-        /* html */
-        `
+      `}}),components:{EvaluationPoint:Ge},setup(){let{score:r}=le();return{style:Ut(()=>({left:`${r.value}%`}))}}});import{defineComponent as $t}from"vue";import{defineComponent as Kt}from"vue";var tt=Kt({template:D({templateRoot:"download-button"})});var nt=wt(rt());var st=()=>{let{allQuestions:r}=te(),{score:s}=le(),h=()=>{let m=["Themenbereich","Frage","Deine Antwort"],L=r.value.map(v=>v.answers.filter(({value:R})=>R).map(R=>[v.title.trim(),v.question.trim(),R.label.trim()])).flat(),a=["Dein Ergebnis","",s.value],S=["","",""];return[m,...L,S,a]},b=(m,L,a)=>{let S=new Blob([m],{type:a}),v=document.createElement("a"),R=URL.createObjectURL(S);v.href=R,v.download=L,v.click(),URL.revokeObjectURL(R)};return{downloadResults:()=>{let m=h(),L=(0,nt.unparse)(m);b(L,"K5-Bedarfstool-Ergebnisse.csv","text/csv")}}};var it=$t({template:D({templateRoot:"download-root",templateReplaces:{"download-button":`
+        <download-button @click.native="downloadResults" />
+      `}}),components:{DownloadButton:tt},setup(){let{downloadResults:r}=st();return{downloadResults:r}}});import{defineComponent as Nt}from"vue";var at=Nt({template:D({templateRoot:"finish-root"})});Jt({template:D({templateRoot:"#bdtl-app",shouldSkipRoot:!0,templateReplaces:{"track-root":`
         <track-root />
-      `
-      ),
-      "question-root": (
-        /* html */
-        `
+      `,"question-root":`
         <question-root />
-      `
-      ),
-      "evaluation-root": (
-        /* html */
-        `
+      `,"evaluation-root":`
         <evaluation-root />
-      `
-      ),
-      "finish-root": (
-        /* html */
-        `
+      `,"download-root":`
+        <download-root v-show="isFinished" />
+      `,"finish-root":`
         <finish-root v-show="isFinished" />
-      `
-      )
-    }
-  }),
-  components: {
-    TrackRoot: TrackRoot_default,
-    QuestionRoot: QuestionRoot_default,
-    EvaluationRoot: EvaluationRoot_default,
-    FinishRoot: FinishRoot_default
-  },
-  setup() {
-    const { isFinished } = useEvaluation();
-    return {
-      isFinished
-    };
-  }
-}).mount("#bdtl-app");
+      `}}),components:{TrackRoot:$e,QuestionRoot:Ve,EvaluationRoot:et,DownloadRoot:it,FinishRoot:at},setup(){let{isFinished:r}=le();return{isFinished:r}}}).mount("#bdtl-app");
+/*! Bundled license information:
+
+papaparse/papaparse.js:
+  (* @license
+  Papa Parse
+  v5.4.1
+  https://github.com/mholt/PapaParse
+  License: MIT
+  *)
+*/
 //# sourceMappingURL=index.js.map
