@@ -271,6 +271,10 @@ var useQuestions = () => {
       [index]: value
     };
   };
+  const isFirstQuestion = computed(() => currentQuestionIndex.value === 0);
+  const isLastQuestion = computed(
+    () => currentQuestionIndex.value === allQuestionsComputed.value.length - 1
+  );
   return {
     allQuestions: allQuestionsComputed,
     currentQuestionIndex: currentQuestionIndexComputed,
@@ -278,7 +282,9 @@ var useQuestions = () => {
     incrementCurrentQuestionIndex,
     decrementCurrentQuestionIndex,
     setCurrentQuestionIndex,
-    setCurrentQuestionAnswer
+    setCurrentQuestionAnswer,
+    isFirstQuestion,
+    isLastQuestion
   };
 };
 
@@ -345,7 +351,7 @@ var TrackRoot_default = defineComponent2({
 });
 
 // src/components/QuestionRoot.ts
-import { computed as computed5, defineComponent as defineComponent6 } from "vue";
+import { computed as computed6, defineComponent as defineComponent6 } from "vue";
 
 // src/components/Question.ts
 import { computed as computed4, defineComponent as defineComponent4, toRefs } from "vue";
@@ -440,7 +446,7 @@ var Question_default = defineComponent4({
 });
 
 // src/components/QuestionArrow.ts
-import { defineComponent as defineComponent5 } from "vue";
+import { computed as computed5, defineComponent as defineComponent5, toRefs as toRefs2 } from "vue";
 var QuestionArrowLeft = defineComponent5({
   template: getTemplate({
     templateRoot: "question-arrow--left"
@@ -455,8 +461,8 @@ var QuestionArrow_default = defineComponent5({
   template: (
     /* html */
     `
-    <question-arrow-left v-if="direction === 'left'" @click.native="$emit('click')" />
-    <question-arrow-right v-if="direction === 'right'" @click.native="$emit('click')" />
+    <question-arrow-left v-if="direction === 'left'" @click.native="handleClick" :style="style" />
+    <question-arrow-right v-if="direction === 'right'" @click.native="handleClick" :style="style" />
   `
   ),
   emits: ["click"],
@@ -464,11 +470,33 @@ var QuestionArrow_default = defineComponent5({
     direction: {
       type: String,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
     QuestionArrowLeft,
     QuestionArrowRight
+  },
+  setup(props, { emit }) {
+    const { disabled } = toRefs2(props);
+    const style = computed5(
+      () => disabled.value ? {
+        cursor: "not-allowed",
+        opacity: 0.5
+      } : {}
+    );
+    const handleClick = () => {
+      if (disabled.value)
+        return;
+      emit("click");
+    };
+    return {
+      style,
+      handleClick
+    };
   }
 });
 
@@ -497,13 +525,13 @@ var QuestionRoot_default = defineComponent6({
       "question-arrow--left": (
         /* html */
         `
-        <question-arrow direction="left" @click="onArrowLeft" />
+        <question-arrow direction="left" @click="onArrowLeft" :disabled="isFirstQuestion" />
       `
       ),
       "question-arrow--right": (
         /* html */
         `
-        <question-arrow direction="right" @click="onArrowRight" />
+        <question-arrow direction="right" @click="onArrowRight" :disabled="isLastQuestion" />
       `
       )
     }
@@ -514,7 +542,9 @@ var QuestionRoot_default = defineComponent6({
       currentQuestion,
       incrementCurrentQuestionIndex,
       decrementCurrentQuestionIndex,
-      setCurrentQuestionAnswer
+      setCurrentQuestionAnswer,
+      isFirstQuestion,
+      isLastQuestion
     } = useQuestions();
     const onArrowLeft = async () => {
       decrementCurrentQuestionIndex();
@@ -522,7 +552,7 @@ var QuestionRoot_default = defineComponent6({
     const onArrowRight = async () => {
       incrementCurrentQuestionIndex();
     };
-    const currentQuestionKey = computed5(() => {
+    const currentQuestionKey = computed6(() => {
       return currentQuestion.value?.title || "";
     });
     return {
@@ -530,7 +560,9 @@ var QuestionRoot_default = defineComponent6({
       currentQuestionKey,
       onArrowLeft,
       onArrowRight,
-      setCurrentQuestionAnswer
+      setCurrentQuestionAnswer,
+      isFirstQuestion,
+      isLastQuestion
     };
   },
   components: {
@@ -540,13 +572,13 @@ var QuestionRoot_default = defineComponent6({
 });
 
 // src/components/EvaluationRoot.ts
-import { computed as computed7, defineComponent as defineComponent8 } from "vue";
+import { computed as computed8, defineComponent as defineComponent8 } from "vue";
 
 // src/components/EvaluationPoint.ts
 import { defineComponent as defineComponent7 } from "vue";
 
 // src/data/evaluation.ts
-import { computed as computed6 } from "vue";
+import { computed as computed7 } from "vue";
 var getEvaluationData = () => {
   const evaluationTextRaw = document.querySelector('[data-bdtl="evaluation-text"]')?.textContent || "";
   const evaluationTexts2 = evaluationTextRaw.split("|").map((text) => text.trim());
@@ -580,7 +612,7 @@ var calculateScoreOfMinAnswers = (answers) => {
 };
 var useEvaluation = () => {
   const { allQuestions: allQuestions2 } = useQuestions();
-  const score = computed6(() => {
+  const score = computed7(() => {
     const currentScore = allQuestions2.value.reduce((score2, question) => {
       const questionScore = calculateScoreOfSelectedAnswers(question.answers);
       return score2 + questionScore * question.weight;
@@ -595,13 +627,13 @@ var useEvaluation = () => {
     }, 0);
     return currentScore >= 0 ? 50 + currentScore / maxScore * 50 : 50 - currentScore / minScore * 50;
   });
-  const evaluationText = computed6(() => {
+  const evaluationText = computed7(() => {
     const evaluationTextIndex = Math.floor(
       score.value * 0.01 * (evaluationTexts.length - 1e-6)
     );
     return evaluationTexts[evaluationTextIndex];
   });
-  const isFinished = computed6(() => {
+  const isFinished = computed7(() => {
     return allQuestions2.value.every(
       (question) => question.answers.some((answer) => answer.value)
     );
@@ -648,7 +680,7 @@ var EvaluationRoot_default = defineComponent8({
   },
   setup() {
     const { score } = useEvaluation();
-    const style = computed7(() => ({
+    const style = computed8(() => ({
       left: `${score.value}%`
     }));
     return {
