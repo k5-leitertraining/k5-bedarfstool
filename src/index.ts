@@ -21,7 +21,7 @@ createApp({
         <evaluation-root />
       `,
       'finish-root': /* html */ `
-        <finish-root v-if="isFinished" />
+        <finish-root v-show="isFinished" />
       `,
     },
   }),
