@@ -482,7 +482,7 @@ var QuestionArrow_default = defineComponent5({
   },
   setup(props, { emit }) {
     const { disabled } = toRefs2(props);
-    const style = computed5(
+    const style2 = computed5(
       () => disabled.value ? {
         cursor: "not-allowed",
         opacity: 0.5
@@ -494,7 +494,7 @@ var QuestionArrow_default = defineComponent5({
       emit("click");
     };
     return {
-      style,
+      style: style2,
       handleClick
     };
   }
@@ -570,6 +570,21 @@ var QuestionRoot_default = defineComponent6({
     QuestionArrow: QuestionArrow_default
   }
 });
+var style = document.createElement("style");
+style.textContent = `
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+`;
+document.head.appendChild(style);
 
 // src/components/EvaluationRoot.ts
 import { computed as computed8, defineComponent as defineComponent8 } from "vue";
@@ -680,11 +695,11 @@ var EvaluationRoot_default = defineComponent8({
   },
   setup() {
     const { score } = useEvaluation();
-    const style = computed8(() => ({
+    const style2 = computed8(() => ({
       left: `${score.value}%`
     }));
     return {
-      style
+      style: style2
     };
   }
 });
