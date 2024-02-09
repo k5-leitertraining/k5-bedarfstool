@@ -68,3 +68,19 @@ export default defineComponent({
     QuestionArrow,
   },
 })
+
+var style = document.createElement('style')
+style.textContent = `
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+`
+document.head.appendChild(style)
