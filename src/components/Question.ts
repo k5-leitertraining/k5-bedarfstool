@@ -1,7 +1,7 @@
 import { PropType, computed, defineComponent, toRefs } from 'vue'
-import { getTemplate } from './getTemplate'
-import { QuestionType } from '../data/questions'
-import Answer from './Answer'
+import { getTemplate } from './getTemplate.js'
+import { QuestionType } from '../data/questions.js'
+import Answer from './Answer.js'
 
 export default defineComponent({
   template: getTemplate({

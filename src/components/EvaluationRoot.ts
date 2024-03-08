@@ -1,7 +1,7 @@
 import { computed, defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
-import EvaluationPoint from './EvaluationPoint'
-import { useEvaluation } from '../data/evaluation'
+import { getTemplate } from './getTemplate.js'
+import EvaluationPoint from './EvaluationPoint.js'
+import { useEvaluation } from '../data/evaluation.js'
 
 export default defineComponent({
   template: getTemplate({

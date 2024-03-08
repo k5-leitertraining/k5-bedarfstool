@@ -1,8 +1,34 @@
-import { defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
+import { computed, defineComponent } from 'vue'
+import { getTemplate } from './getTemplate.js'
+import { template } from 'lodash-es'
+import { useDownload } from '../data/download.js'
+
+const getSrc = () => {
+  return (
+    document
+      .querySelector('[data-bdtl="finish-root__file-iframe"]')
+      ?.getAttribute('src') || ''
+  )
+}
+
+const srcTemplate = template(getSrc())
 
 export default defineComponent({
   template: getTemplate({
     templateRoot: 'finish-root',
+    withAttrs: {
+      'finish-root__file-iframe': {
+        ':src': 'src',
+      },
+    },
   }),
+  setup() {
+    const { fileContent } = useDownload()
+    const src = computed(() => {
+      return srcTemplate({ fileContent: encodeURIComponent(fileContent.value) })
+    })
+    return {
+      src,
+    }
+  },
 })

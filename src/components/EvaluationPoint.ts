@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
-import { useEvaluation } from '../data/evaluation'
+import { getTemplate } from './getTemplate.js'
+import { useEvaluation } from '../data/evaluation.js'
 
 export default defineComponent({
   template: getTemplate({

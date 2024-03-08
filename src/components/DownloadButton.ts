@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
+import { getTemplate } from './getTemplate.js'
 
 export default defineComponent({
   template: getTemplate({

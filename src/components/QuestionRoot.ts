@@ -1,8 +1,8 @@
 import { computed, defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
-import Question from './Question'
-import QuestionArrow from './QuestionArrow'
-import { useQuestions } from '../data/questions'
+import { getTemplate } from './getTemplate.js'
+import Question from './Question.js'
+import QuestionArrow from './QuestionArrow.js'
+import { useQuestions } from '../data/questions.js'
 
 export default defineComponent({
   template: getTemplate({

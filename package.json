@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "pnpm build:css && pnpm build:ts",
     "build:ts": "tsup --dts",
@@ -18,11 +19,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "@types/papaparse": "^5.3.14",
     "concurrently": "^8.2.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
     "live-server": "^1.2.2",
+    "lodash-es": "^4.17.21",
     "papaparse": "^5.4.1",
     "prettier": "3.0.3",
     "tailwindcss": "^3.3.5",

@@ -1,5 +1,5 @@
 import { PropType, computed, defineComponent, toRefs } from 'vue'
-import { getTemplate } from './getTemplate'
+import { getTemplate } from './getTemplate.js'
 
 const QuestionArrowLeft = defineComponent({
   template: getTemplate({

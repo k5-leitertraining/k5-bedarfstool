@@ -1,6 +1,7 @@
 import { unparse } from 'papaparse'
-import { useQuestions } from './questions'
-import { useEvaluation } from './evaluation'
+import { useQuestions } from './questions.js'
+import { useEvaluation } from './evaluation.js'
+import { computed } from 'vue'
 
 export const useDownload = () => {
   const { allQuestions } = useQuestions()
@@ -37,11 +38,14 @@ export const useDownload = () => {
     URL.revokeObjectURL(url)
   }
 
-  const downloadResults = () => {
+  const fileContent = computed(() => {
     const data = getDownloadData()
-    const csv = unparse(data)
-    download(csv, 'K5-Bedarfstool-Ergebnisse.csv', 'text/csv')
+    return unparse(data)
+  })
+
+  const downloadResults = () => {
+    download(fileContent.value, 'K5-Bedarfstool-Ergebnisse.csv', 'text/csv')
   }
 
-  return { downloadResults }
+  return { downloadResults, fileContent }
 }

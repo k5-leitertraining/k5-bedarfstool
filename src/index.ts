@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
-import TrackRoot from './components/TrackRoot'
-import QuestionRoot from './components/QuestionRoot'
-import EvaluationRoot from './components/EvaluationRoot'
-import DownloadRoot from './components/DownloadRoot'
-import FinishRoot from './components/FinishRoot'
-import { getTemplate } from './components/getTemplate'
-import { useEvaluation } from './data/evaluation'
+import TrackRoot from './components/TrackRoot.js'
+import QuestionRoot from './components/QuestionRoot.js'
+import EvaluationRoot from './components/EvaluationRoot.js'
+import DownloadRoot from './components/DownloadRoot.js'
+import FinishRoot from './components/FinishRoot.js'
+import { getTemplate } from './components/getTemplate.js'
+import { useEvaluation } from './data/evaluation.js'
 
 createApp({
   template: getTemplate({
@@ -25,7 +25,7 @@ createApp({
         <download-root v-show="isFinished" />
       `,
       'finish-root': /* html */ `
-        <finish-root v-show="isFinished" />
+        <finish-root v-if="isFinished" />
       `,
     },
   }),

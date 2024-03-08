@@ -1,8 +1,8 @@
 import { defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
-import TrackPoint from './TrackPoint'
-import { useTrackPoints } from '../data/trackPoints'
-import { useQuestions } from '../data/questions'
+import { getTemplate } from './getTemplate.js'
+import TrackPoint from './TrackPoint.js'
+import { useTrackPoints } from '../data/trackPoints.js'
+import { useQuestions } from '../data/questions.js'
 
 export default defineComponent({
   template: getTemplate({

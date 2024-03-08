@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { useQuestions } from './questions'
+import { useQuestions } from './questions.js'
 
 export type TrackPointType = {
   number: string

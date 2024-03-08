@@ -85,6 +85,9 @@ export const getTemplate = ({
       const element = templateElement.querySelector(`[data-bdtl="${key}"]`)
       if (element) {
         Object.entries(value).forEach(([attr, attrValue]) => {
+          if (attr.startsWith(':')) {
+            element.removeAttribute(attr.slice(1))
+          }
           element.setAttribute(attr, attrValue)
         })
       }

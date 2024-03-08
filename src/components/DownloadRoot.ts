@@ -1,8 +1,8 @@
 import { computed, defineComponent } from 'vue'
-import { getTemplate } from './getTemplate'
-import DownloadButton from './DownloadButton'
-import { useEvaluation } from '../data/evaluation'
-import { useDownload } from '../data/download'
+import { getTemplate } from './getTemplate.js'
+import DownloadButton from './DownloadButton.js'
+import { useEvaluation } from '../data/evaluation.js'
+import { useDownload } from '../data/download.js'
 
 export default defineComponent({
   template: getTemplate({

@@ -1,6 +1,6 @@
 import { PropType, defineComponent } from 'vue'
-import { TrackPointType } from '../data/trackPoints'
-import { getTemplate } from './getTemplate'
+import { TrackPointType } from '../data/trackPoints.js'
+import { getTemplate } from './getTemplate.js'
 
 const createTrackPointVariant = (variant: string) =>
   defineComponent({

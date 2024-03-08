@@ -1,5 +1,5 @@
 import { computed, watch } from 'vue'
-import { AnswerType, useQuestions } from './questions'
+import { AnswerType, useQuestions } from './questions.js'
 
 const getEvaluationData = () => {
   const evaluationTextRaw =
