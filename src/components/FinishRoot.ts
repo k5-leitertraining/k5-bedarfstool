@@ -25,7 +25,10 @@ export default defineComponent({
   setup() {
     const { fileContent } = useDownload()
     const src = computed(() => {
-      return srcTemplate({ fileContent: encodeURIComponent(fileContent.value) })
+      return srcTemplate({
+        fileContent: encodeURIComponent(fileContent.value),
+        currentDate: new Date().toISOString().split('T')[0],
+      })
     })
     return {
       src,
