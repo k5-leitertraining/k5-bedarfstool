@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, ref, watch } from 'vue'
 import TrackRoot from './components/TrackRoot.js'
 import QuestionRoot from './components/QuestionRoot.js'
 import EvaluationRoot from './components/EvaluationRoot.js'
@@ -22,7 +22,7 @@ createApp({
         <evaluation-root />
       `,
       'download-root': /* html */ `
-        <download-root v-show="isFinished" />
+        <download-root ref='downloadRoot' v-show="isFinished" />
       `,
       'finish-root': /* html */ `
         <finish-root v-if="isFinished" />
@@ -39,8 +39,20 @@ createApp({
   setup() {
     const { isFinished } = useEvaluation()
 
+    const downloadRoot = ref<InstanceType<typeof DownloadRoot> | null>(null)
+    watch(isFinished, async (isFinished) => {
+      if (isFinished) {
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        downloadRoot.value?.$el.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }
+    })
+
     return {
       isFinished,
+      downloadRoot,
     }
   },
 }).mount('#bdtl-app')
