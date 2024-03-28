@@ -2,6 +2,8 @@ import { computed, defineComponent } from 'vue'
 import { getTemplate } from './getTemplate.js'
 import { template } from 'lodash-es'
 import { useDownload } from '../data/download.js'
+import { useResultTracking } from '../api/useResultTracking.js'
+import { useFormSubmissionData } from '../utils/useFormSubmissionData.js'
 
 const getSrc = () => {
   return (
@@ -29,6 +31,12 @@ export default defineComponent({
         fileContent: encodeURIComponent(fileContent.value),
         currentDate: new Date().toISOString().split('T')[0],
       })
+    })
+
+    const { trackResult } = useResultTracking()
+    useFormSubmissionData({
+      src,
+      onSubmit: trackResult,
     })
     return {
       src,
