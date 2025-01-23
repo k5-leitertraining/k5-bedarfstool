@@ -18,7 +18,7 @@ export const useResultTracking = () => {
 
   const trackResult = (data: { email: string; orgName: string }) => {
     return fetch(
-      'https://k5-leitertraining.de/.netlify/functions/bedarfstool-statistic',
+      'https://netlify.k5-leitertraining.de/.netlify/functions/bedarfstool-statistic',
       {
         method: 'POST',
         body: JSON.stringify({
