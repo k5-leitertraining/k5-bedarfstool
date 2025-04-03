@@ -3,13 +3,15 @@ import { getTemplate } from './getTemplate.js'
 import Question from './Question.js'
 import QuestionArrow from './QuestionArrow.js'
 import { useQuestions } from '../data/questions.js'
+import QuestionRoot from './QuestionRoot.html'
 
 export default defineComponent({
-  template: getTemplate({
-    templateRoot: 'question-root',
-    templateInjects: {
-      'question-container': /* html */ `
-        <Transition 
+  template:
+    getTemplate({
+      templateRoot: 'question-root-',
+      templateInjects: {
+        'question-container': /* html */ `
+        <Transition
           mode="out-in"
           class="duration-300"
           enter-from-class="opacity-0"
@@ -20,16 +22,16 @@ export default defineComponent({
           <question :question="currentQuestion" :key="currentQuestionKey" @update:answer="setCurrentQuestionAnswer($event.index, $event.value)"/>
         </Transition>
       `,
-    },
-    templateReplaces: {
-      'question-arrow--left': /* html */ `
+      },
+      templateReplaces: {
+        'question-arrow--left': /* html */ `
         <question-arrow direction="left" @click="onArrowLeft" :disabled="isFirstQuestion" />
       `,
-      'question-arrow--right': /* html */ `
+        'question-arrow--right': /* html */ `
         <question-arrow direction="right" @click="onArrowRight" :disabled="isLastQuestion" />
       `,
-    },
-  }),
+      },
+    }) || QuestionRoot,
   props: {},
   setup() {
     const {

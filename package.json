@@ -13,6 +13,7 @@
     "dev:server": "cd dist && live-server",
     "dev:tailwind": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
   "keywords": [],

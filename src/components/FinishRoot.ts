@@ -4,6 +4,7 @@ import { template } from 'lodash-es'
 import { useDownload } from '../data/download.js'
 import { useResultTracking } from '../api/useResultTracking.js'
 import { useFormSubmissionData } from '../utils/useFormSubmissionData.js'
+import FinishRoot from './FinishRoot.html'
 
 const getSrc = () => {
   return (
@@ -16,14 +17,15 @@ const getSrc = () => {
 const srcTemplate = template(getSrc())
 
 export default defineComponent({
-  template: getTemplate({
-    templateRoot: 'finish-root',
-    withAttrs: {
-      'finish-root__file-iframe': {
-        ':src': 'src',
+  template:
+    getTemplate({
+      templateRoot: 'finish-root',
+      withAttrs: {
+        'finish-root__file-iframe': {
+          ':src': 'src',
+        },
       },
-    },
-  }),
+    }) || FinishRoot,
   setup() {
     const { fileContent } = useDownload()
     const src = computed(() => {

@@ -1,16 +1,20 @@
 import { PropType, computed, defineComponent, toRefs } from 'vue'
 import { getTemplate } from './getTemplate.js'
+import QuestionArrowLeftHtml from './QuestionArrowLeft.html'
+import QuestionArrowRightHtml from './QuestionArrowRight.html'
 
 const QuestionArrowLeft = defineComponent({
-  template: getTemplate({
-    templateRoot: 'question-arrow--left',
-  }),
+  template:
+    getTemplate({
+      templateRoot: 'question-arrow--left',
+    }) || QuestionArrowLeftHtml,
 })
 
 const QuestionArrowRight = defineComponent({
-  template: getTemplate({
-    templateRoot: 'question-arrow--right',
-  }),
+  template:
+    getTemplate({
+      templateRoot: 'question-arrow--right',
+    }) || QuestionArrowRightHtml,
 })
 
 export default defineComponent({

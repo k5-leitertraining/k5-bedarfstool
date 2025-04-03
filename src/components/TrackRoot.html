@@ -1,0 +1,9 @@
+<div data-bdtl="track-root" class="flex mx-16 mt-4 mb-16">
+  <template v-for="(trackPoint, index) in trackPoints">
+    <track-point
+      :track-point="trackPoint"
+      :with-track="isFirstTrackPoint(index) ? undefined : isTrackDone(index) ? 'done' : 'open'"
+      @click="setCurrentQuestionIndex(index)"
+    />
+  </template>
+</div>
