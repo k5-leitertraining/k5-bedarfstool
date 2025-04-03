@@ -18,7 +18,7 @@ export const getTemplate = ({
   const templateRootQueryString =
     templateRoot.startsWith('.') || templateRoot.startsWith('#')
       ? templateRoot
-      : `[data-bdtl="${templateRoot}"], .bdtl-${templateRoot}`
+      : `[data-bdtl="${templateRoot}"]`
   const templateRootElement = document.querySelector(templateRootQueryString)
 
   if (!templateRootElement) {
