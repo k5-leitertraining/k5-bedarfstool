@@ -20,24 +20,30 @@ const getWeightedText = (textRaw: string, defaultWeight: number = 0) => {
 }
 
 const getQuestionsData = (): QuestionType[] => {
-  const questionElements = document.querySelectorAll('[data-bdtl="question"]')
+  const questionElements = document.querySelectorAll(
+    '[data-bdtl="question"], .bdtl-question'
+  )
+
   const questionsData = [...questionElements].map((element) => {
     const titleRaw =
       element
-        .querySelector('[data-bdtl="question__title"]')
+        .querySelector('[data-bdtl="question__title"], .bdtl-question__title')
         ?.textContent?.trim() || ''
     const { weight, text: title } = getWeightedText(titleRaw, 1)
+
     const question =
       element
-        .querySelector('[data-bdtl="question__question"]')
+        .querySelector(
+          '[data-bdtl="question__question"], .bdtl-question__question'
+        )
         ?.textContent?.trim() || ''
 
-    const answerElements = element.querySelectorAll('[data-bdtl="answer"]')
-    const answers = [...answerElements].map((element) => {
-      const labelRaw =
-        element
-          .querySelector('[data-bdtl="answer__label"]')
-          ?.textContent?.trim() || ''
+    const labelRaws = [
+      ...element.querySelectorAll(
+        '[data-bdtl="answer__label"], .bdtl-answer__label'
+      ),
+    ].map((el) => el.textContent?.trim() || '')
+    const answers = labelRaws.map((labelRaw) => {
       const { weight, text: label } = getWeightedText(labelRaw)
       return {
         label: label || labelRaw,

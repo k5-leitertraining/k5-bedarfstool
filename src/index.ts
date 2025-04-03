@@ -9,7 +9,7 @@ import { useEvaluation } from './data/evaluation.js'
 
 createApp({
   template: getTemplate({
-    templateRoot: '#bdtl-app',
+    templateRoot: '#bdtl-app, .bdtl-app',
     shouldSkipRoot: true,
     templateReplaces: {
       'track-root': /* html */ `

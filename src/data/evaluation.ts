@@ -3,7 +3,9 @@ import { AnswerType, useQuestions } from './questions.js'
 
 const getEvaluationData = () => {
   const evaluationTextRaw =
-    document.querySelector('[data-bdtl="evaluation-text"]')?.textContent || ''
+    document.querySelector(
+      '[data-bdtl="evaluation-text"], .bdtl-evalutation-text'
+    )?.textContent || ''
 
   const evaluationTexts = evaluationTextRaw
     .split('|')
