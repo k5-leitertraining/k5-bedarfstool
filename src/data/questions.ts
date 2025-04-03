@@ -40,7 +40,7 @@ const getQuestionsData = (): QuestionType[] => {
 
     const labelRaws = [
       ...element.querySelectorAll(
-        '[data-bdtl="answer__label"], .bdtl-answer__label'
+        '[data-bdtl="answer__label"], .bdtl-answer__label, .bdtl-answer-list li'
       ),
     ].map((el) => el.textContent?.trim() || '')
     const answers = labelRaws.map((labelRaw) => {

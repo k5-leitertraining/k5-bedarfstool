@@ -10,7 +10,7 @@
     "build:css": "tailwindcss -i ./src/style.css -o ./dist/style.css",
     "dev": "concurrently \"pnpm:dev:*\"",
     "dev:transpile": "tsup --watch",
-    "dev:server": "cd dist && live-server",
+    "dev:server": "cd dist && live-server --cors",
     "dev:tailwind": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
