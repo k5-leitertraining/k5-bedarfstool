@@ -57,4 +57,4 @@ createApp({
       downloadRoot,
     }
   },
-}).mount('#bdtl-app')
+}).mount('#bdtl-app, .bdtl-app')
