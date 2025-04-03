@@ -1,0 +1,19 @@
+<!-- Title -->
+<h2 class="text-3xl font-bold text-center">
+  Lokale Leiterausbildung: Bedarfstool
+</h2>
+
+<!-- Track -->
+<track-root />
+
+<!-- Questions -->
+<question-root />
+
+<!-- Evaluation -->
+<evaluation-root />
+
+<!-- Download Content -->
+<download-root ref="downloadRoot" v-show="isFinished" />
+
+<!-- Finish Content -->
+<finish-root v-if="isFinished" />
