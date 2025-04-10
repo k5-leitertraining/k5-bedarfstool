@@ -10,7 +10,8 @@ const getSrc = () => {
   return (
     document
       .querySelector('[data-bdtl="finish-root__file-iframe"]')
-      ?.getAttribute('src') || ''
+      ?.getAttribute('src') ||
+    'https://api.leadconnectorhq.com/widget/form/WuJPpANSZHLMwqY1p1gl?file-content=${fileContent}&abgeschickt-am=${currentDate}'
   )
 }
 
