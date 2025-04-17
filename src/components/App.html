@@ -1,19 +1,16 @@
-<!-- Title -->
-<h2 class="text-3xl font-bold text-center">
-  Lokale Leiterausbildung: Bedarfstool
-</h2>
+<div class="max-w-[1364px] mx-auto font-['Barlow']">
+  <!-- Track -->
+  <track-root class="text-xl" />
 
-<!-- Track -->
-<track-root />
+  <!-- Questions -->
+  <question-root />
 
-<!-- Questions -->
-<question-root />
+  <!-- Evaluation -->
+  <evaluation-root />
 
-<!-- Evaluation -->
-<evaluation-root />
+  <!-- Download Content -->
+  <download-root ref="downloadRoot" v-show="isFinished" />
 
-<!-- Download Content -->
-<download-root ref="downloadRoot" v-show="isFinished" />
-
-<!-- Finish Content -->
-<finish-root v-if="isFinished" />
+  <!-- Finish Content -->
+  <finish-root v-if="isFinished" />
+</div>
