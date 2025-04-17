@@ -6,78 +6,120 @@
     <title>K5 Bedarfstool</title>
   </head>
   <body>
-    <div class="px-4">
-      <div class="max-w-5xl p-4 m-4 mx-auto shadow dummy-container">
-        <!-- Declare the Data -->
-        <div class="hidden">
-          <div class="bdtl-question">
-            <div class="bdtl-question__title">Ausrichtung</div>
-            <div class="bdtl-question__question">
-              Unsere Kirche/Organisation
-            </div>
-            <p class="bdtl-answer__label">
-              [+50] hat eine klare Vision und macht deutliche Fortschritte
-              dorthin
-            </p>
-            <p class="bdtl-answer__label">
-              [-60] scheint seine Richtung alle paar Monate zu ändern
-            </p>
-            <p class="bdtl-answer__label">
-              [-60] hat keine klare Vision und wankt hin und her
-            </p>
-          </div>
+    <!-- Declare the Data -->
+    <div class="to-be-hidden">
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Ausrichtung</div>
+        <div class="bdtl-question__question">Unsere Kirche/Organisation</div>
+        <p class="bdtl-answer__label">
+          [+50] hat eine klare Vision und macht deutliche Fortschritte dorthin
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] hat eine Vision, aber sie könnte/sollte konsequenter verfolgt
+          werden
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] hat keine klare Vision und sucht nach Orientierung
+        </p>
+      </div>
 
-          <div class="bdtl-question">
-            <div class="bdtl-question__title">Mitglieder</div>
-            <div class="bdtl-question__question">Unsere Leute sind meist</div>
-            <p class="bdtl-answer__label">
-              [+50] Positive Einflussnehmer in Gemeinde & Beruf
-            </p>
-            <p class="bdtl-answer__label">
-              [-60] eher passive Besucher, statt aktive Einflussnehmer
-            </p>
-            <p class="bdtl-answer__label">
-              [-60] zögerlich, wenn es darum geht Verantwortung zu übernehmen
-            </p>
-          </div>
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Mitglieder</div>
+        <div class="bdtl-question__question">Unsere Leute sind meist</div>
+        <p class="bdtl-answer__label">
+          [+50] aktive, positive Einflussnehmer in ihrem Umfeld & Gesellschaft
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] regelmäßige Kirchengänger, aber haben Schwierigkeiten den
+          Auftrag auszuleben
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] recht neu im Glauben und brauchen mehr Hilfe in Jüngerschaft &
+          Leiterschaft
+        </p>
+      </div>
 
-          <div class="bdtl-question">
-            <div class="bdtl-question__title">Entwicklung</div>
-            <div class="bdtl-question__question">
-              Unsere Ehrenamtler bzw. Angestellten...
-            </div>
-            <p class="bdtl-answer__label">
-              [+50] besuchen regelmäßig Fortbildung & werden kompetenter
-            </p>
-            <p class="bdtl-answer__label">
-              [-60] sehen meist keinen wirklichen Bedarf für Entwicklung
-            </p>
-            <p class="bdtl-answer__label">
-              [-60] machen seit Jahren die gleichen Dinge gleich gut/schlecht
-            </p>
-          </div>
-
-          <div class="bdtl-evaluation-text">
-            Enorm hohes Potenzial für Leiterentwicklung | Sehr Hohes Potenzial
-            für Leiterentwicklung | Hohes Potenzial für Leiterentwicklung |
-            Leiterentwicklung existiert, kann aber optimiert werden |
-            Leiterentwicklung funktioniert, gebt es anderen weiter | Ihr seid
-            vermutlich die beste Kirche der Nation
-          </div>
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Entwicklung</div>
+        <div class="bdtl-question__question">
+          Unsere Ehrenamtler bzw. Angestellten...
         </div>
+        <p class="bdtl-answer__label">
+          [+50] besuchen regelmäßig Fortbildungen & sind sehr kompetent
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] wünschen sich mehr Anleitung, es fehlt aber an Mitteln
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] stecken im Gemeindealltag fest und haben keinen Kopf dafür
+        </p>
+      </div>
 
-        <!-- Mount the App -->
-        <div class="bdtl-app"></div>
-        <link rel="stylesheet" href="style.css" />
-        <script type="importmap">
-          {
-            "imports": {
-              "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-            }
-          }
-        </script>
-        <script type="module" src="index.js"></script>
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Leitungsteam</div>
+        <div class="bdtl-question__question">Unser Leitungsteam...</div>
+        <p class="bdtl-answer__label">
+          [+50] arbeitet innovativ, strategisch und ist geistgeleitet
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] macht viele To-Do's, die für Wachstum eigentlich delegiert
+          werden sollten
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] muss meist Brände löschen und alles irgendwie zusammenhalten
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Mitarbeiter</div>
+        <div class="bdtl-question__question">Unsere Teams & Hauskreise...</div>
+        <p class="bdtl-answer__label">
+          [+50] sind super besetzt und werden von begabten Leitern geführt
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] kriegen die Aufgaben erledigt, aber mehr auch nicht
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] brauchen komplett neue Motivation und Feuer für den Auftrag
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Charakter</div>
+        <div class="bdtl-question__question">Unsere Leiter...</div>
+        <p class="bdtl-answer__label">
+          [+50] sind meist Vorbilder, haben einen aktiven Glauben und leben
+          befreit
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] wollen integer und vorbildlich leben, brauchen aber
+          Hilfestellung
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] führen ein Leben, das eigentlich nicht dem Anspruch ihrer Rolle
+          entspricht
+        </p>
+      </div>
+
+      <div class="bdtl-evaluation-text">
+        Enorm hohes Potenzial für Leiterentwicklung | Sehr Hohes Potenzial für
+        Leiterentwicklung | Hohes Potenzial für Leiterentwicklung |
+        Leiterentwicklung existiert, kann aber optimiert werden |
+        Leiterentwicklung funktioniert, gebt es anderen weiter | Ihr seid
+        vermutlich die beste Kirche der Nation
       </div>
     </div>
+
+    <!-- Mount the App -->
+    <div class="bdtl-app"></div>
+    <link rel="stylesheet" href="style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+    <script type="module" src="index.js"></script>
   </body>
 </html>
