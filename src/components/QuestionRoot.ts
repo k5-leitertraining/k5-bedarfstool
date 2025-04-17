@@ -1,4 +1,4 @@
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { getTemplate } from './getTemplate.js'
 import Question from './Question.js'
 import QuestionArrow from './QuestionArrow.js'
@@ -13,7 +13,7 @@ export default defineComponent({
         'question-container': /* html */ `
         <Transition
           mode="out-in"
-          class="duration-300"
+          class="duration-200"
           enter-from-class="opacity-0"
           enter-to-class="opacity-100"
           leave-from-class="opacity-100"
@@ -38,10 +38,20 @@ export default defineComponent({
       currentQuestion,
       incrementCurrentQuestionIndex,
       decrementCurrentQuestionIndex,
+      currentQuestionIndex,
       setCurrentQuestionAnswer,
       isFirstQuestion,
       isLastQuestion,
     } = useQuestions()
+
+    const isBackwardMoving = ref(false)
+    watch(currentQuestionIndex, (newIndex, oldIndex) => {
+      if (newIndex < oldIndex) {
+        isBackwardMoving.value = true
+      } else {
+        isBackwardMoving.value = false
+      }
+    })
 
     const onArrowLeft = async () => {
       decrementCurrentQuestionIndex()
@@ -63,6 +73,7 @@ export default defineComponent({
       setCurrentQuestionAnswer,
       isFirstQuestion,
       isLastQuestion,
+      isBackwardMoving,
     }
   },
   components: {
@@ -73,8 +84,8 @@ export default defineComponent({
 
 var style = document.createElement('style')
 style.textContent = `
-.duration-300 {
-  transition-duration: 300ms;
+.duration-200 {
+transition-duration: 200ms;
 }
 
 .opacity-0 {

@@ -1,4 +1,4 @@
-<div data-bdtl="question-root" class="flex items-center">
+<div data-bdtl="question-root" class="flex items-stretch max-w-4xl mx-auto">
   <question-arrow
     direction="left"
     @click="onArrowLeft"
@@ -8,11 +8,11 @@
   <div data-bdtl="question-container" class="flex-grow">
     <Transition
       mode="out-in"
-      class="duration-300"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+      class="duration-200"
+      :enter-from-class="`opacity-0 ${isBackwardMoving ? '-translate-x-6' : 'translate-x-6'}`"
+      enter-to-class="opacity-100 translate-x-0"
+      leave-from-class="opacity-100 translate-x-0"
+      :leave-to-class="`opacity-0 ${isBackwardMoving ? 'translate-x-6' : '-translate-x-6'}`"
     >
       <question
         :question="currentQuestion"
