@@ -1,16 +1,30 @@
 import { PropType, defineComponent } from 'vue'
 import { TrackPointType } from '../data/trackPoints.js'
 import { getTemplate } from './getTemplate.js'
+import TrackPointDoneHtml from './TrackPointDone.html'
+import TrackPointCurrentHtml from './TrackPointCurrent.html'
+import TrackPointOpenHtml from './TrackPointOpen.html'
+import TrackTrackOpenHtml from './TrackTrackOpen.html'
+import TrackTrackDoneHtml from './TrackTrackDone.html'
 
-const createTrackPointVariant = (variant: string) =>
+type TrackPointVariant = 'open' | 'current' | 'done'
+
+const trackPointFallbackHtmlMap = {
+  open: TrackPointOpenHtml,
+  current: TrackPointCurrentHtml,
+  done: TrackPointDoneHtml,
+} satisfies Record<TrackPointVariant, string>
+
+const createTrackPointVariant = (variant: TrackPointVariant) =>
   defineComponent({
-    template: getTemplate({
-      templateRoot: `track-point--${variant}`,
-      dataInjects: {
-        'track-point__number': 'number',
-        'track-point__name': 'name',
-      },
-    }),
+    template:
+      getTemplate({
+        templateRoot: `track-point--${variant}`,
+        dataInjects: {
+          'track-point__number': 'number',
+          'track-point__name': 'name',
+        },
+      }) || trackPointFallbackHtmlMap[variant],
     props: {
       number: {
         type: String,
@@ -27,11 +41,19 @@ const TrackPointOpen = createTrackPointVariant('open')
 const TrackPointCurrent = createTrackPointVariant('current')
 const TrackPointDone = createTrackPointVariant('done')
 
-const createTrackTrackVariant = (variant: string) =>
+type TrackTrackVariant = 'open' | 'done'
+
+const trackTrackFallbackHtmlMap: Record<TrackTrackVariant, string> = {
+  open: TrackTrackOpenHtml,
+  done: TrackTrackDoneHtml,
+}
+
+const createTrackTrackVariant = (variant: TrackTrackVariant) =>
   defineComponent({
-    template: getTemplate({
-      templateRoot: `track-track--${variant}`,
-    }),
+    template:
+      getTemplate({
+        templateRoot: `track-track--${variant}`,
+      }) || trackTrackFallbackHtmlMap[variant],
   })
 
 const TrackTrackOpen = createTrackTrackVariant('open')
@@ -43,12 +65,12 @@ export default defineComponent({
       <track-track-open v-if="withTrack === 'open'" />
       <track-track-done v-if="withTrack === 'done'" />
     </template>
-    <track-point-open 
+    <track-point-open
       v-if="trackPoint.status === 'open'"
       :number="trackPoint.number"
       :name="trackPoint.name" @click.native="$emit('click')"
     />
-    <track-point-current 
+    <track-point-current
       v-if="trackPoint.status === 'current'"
       :number="trackPoint.number"
       :name="trackPoint.name"

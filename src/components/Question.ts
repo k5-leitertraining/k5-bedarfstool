@@ -2,16 +2,18 @@ import { PropType, computed, defineComponent, toRefs } from 'vue'
 import { getTemplate } from './getTemplate.js'
 import { QuestionType } from '../data/questions.js'
 import Answer from './Answer.js'
+import Question from './Question.html'
 
 export default defineComponent({
-  template: getTemplate({
-    templateRoot: 'question',
-    dataInjects: {
-      question__title: 'title',
-      question__question: 'question',
-    },
-    templateInjects: {
-      'answer-root': /* html */ `
+  template:
+    getTemplate({
+      templateRoot: 'question',
+      dataInjects: {
+        question__title: 'title',
+        question__question: 'question',
+      },
+      templateInjects: {
+        'answer-root': /* html */ `
         <answer
           v-for="(answer, index) in answers"
           :key="index"
@@ -20,8 +22,8 @@ export default defineComponent({
           @update:model-value="$emit('update:answer', { index, value: $event })"
         />
       `,
-    },
-  }),
+      },
+    }) || Question,
   props: {
     question: {
       type: Object as PropType<QuestionType>,

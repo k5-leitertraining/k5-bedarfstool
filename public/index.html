@@ -4,6 +4,114 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>K5 Bedarfstool</title>
+  </head>
+  <body>
+    <!-- Declare the Data -->
+    <div class="to-be-hidden">
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Ausrichtung</div>
+        <div class="bdtl-question__question">Unsere Kirche/Organisation</div>
+        <p class="bdtl-answer__label">
+          [+50] hat eine klare Vision und macht deutliche Fortschritte dorthin
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] hat eine Vision, aber sie könnte/sollte konsequenter verfolgt
+          werden
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] hat keine klare Vision und sucht nach Orientierung
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Mitglieder</div>
+        <div class="bdtl-question__question">Unsere Leute sind meist</div>
+        <p class="bdtl-answer__label">
+          [+50] aktive, positive Einflussnehmer in ihrem Umfeld & Gesellschaft
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] regelmäßige Kirchengänger, aber haben Schwierigkeiten den
+          Auftrag auszuleben
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] recht neu im Glauben und brauchen mehr Hilfe in Jüngerschaft &
+          Leiterschaft
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Entwicklung</div>
+        <div class="bdtl-question__question">
+          Unsere Ehrenamtler bzw. Angestellten...
+        </div>
+        <p class="bdtl-answer__label">
+          [+50] besuchen regelmäßig Fortbildungen & sind sehr kompetent
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] wünschen sich mehr Anleitung, es fehlt aber an Mitteln
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] stecken im Gemeindealltag fest und haben keinen Kopf dafür
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Leitungsteam</div>
+        <div class="bdtl-question__question">Unser Leitungsteam...</div>
+        <p class="bdtl-answer__label">
+          [+50] arbeitet innovativ, strategisch und ist geistgeleitet
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] macht viele To-Do's, die für Wachstum eigentlich delegiert
+          werden sollten
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] muss meist Brände löschen und alles irgendwie zusammenhalten
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Mitarbeiter</div>
+        <div class="bdtl-question__question">Unsere Teams & Hauskreise...</div>
+        <p class="bdtl-answer__label">
+          [+50] sind super besetzt und werden von begabten Leitern geführt
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] kriegen die Aufgaben erledigt, aber mehr auch nicht
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] brauchen komplett neue Motivation und Feuer für den Auftrag
+        </p>
+      </div>
+
+      <div class="bdtl-question">
+        <div class="bdtl-question__title">Charakter</div>
+        <div class="bdtl-question__question">Unsere Leiter...</div>
+        <p class="bdtl-answer__label">
+          [+50] sind meist Vorbilder, haben einen aktiven Glauben und leben
+          befreit
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] wollen integer und vorbildlich leben, brauchen aber
+          Hilfestellung
+        </p>
+        <p class="bdtl-answer__label">
+          [-60] führen ein Leben, das eigentlich nicht dem Anspruch ihrer Rolle
+          entspricht
+        </p>
+      </div>
+
+      <div class="bdtl-evaluation-text">
+        Enorm hohes Potenzial für Leiterentwicklung | Sehr Hohes Potenzial für
+        Leiterentwicklung | Hohes Potenzial für Leiterentwicklung |
+        Leiterentwicklung existiert, kann aber optimiert werden |
+        Leiterentwicklung funktioniert, gebt es anderen weiter | Ihr seid
+        vermutlich die beste Kirche der Nation
+      </div>
+    </div>
+
+    <!-- Mount the App -->
+    <div class="bdtl-app"></div>
     <link rel="stylesheet" href="style.css" />
     <script type="importmap">
       {
@@ -12,239 +120,6 @@
         }
       }
     </script>
-  </head>
-  <body>
-    <div class="px-4">
-      <div class="max-w-5xl p-4 m-4 mx-auto shadow dummy-container">
-        <!-- Whole Wrapper -->
-        <div id="bdtl-app">
-          <!-- Title -->
-          <h2 class="text-3xl font-bold text-center">
-            Lokale Leiterausbildung: Bedarfstool
-          </h2>
-
-          <!-- Track -->
-          <div data-bdtl="track-root" class="flex mx-16 mt-4 mb-16">
-            <div
-              data-bdtl="track-point--done"
-              class="relative cursor-pointer flex-0"
-            >
-              <div
-                data-bdtl="track-point__number"
-                class="flex items-center justify-center w-8 h-8 text-center rounded-full text-slate-300 bg-slate-600"
-              >
-                1
-              </div>
-              <div class="absolute flex flex-col items-center w-0 left-1/2">
-                <div data-bdtl="track-point__name" class="text-center">
-                  DONE
-                </div>
-              </div>
-            </div>
-            <div
-              data-bdtl="track-track--done"
-              class="flex-1 h-2 mt-3 -mx-1 bg-slate-600"
-            ></div>
-            <div
-              data-bdtl="track-point--current"
-              class="relative cursor-pointer flex-0"
-            >
-              <div
-                data-bdtl="track-point__number"
-                class="flex items-center justify-center w-8 h-8 text-center border-2 rounded-full border-slate-600 text-slate-800 bg-slate-400"
-              >
-                2
-              </div>
-              <div class="absolute flex flex-col items-center w-0 left-1/2">
-                <div data-bdtl="track-point__name" class="text-center">
-                  CURRENT
-                </div>
-              </div>
-            </div>
-            <div
-              data-bdtl="track-track--open"
-              class="flex-1 h-2 mt-3 -mx-1 bg-slate-400"
-            ></div>
-            <div
-              data-bdtl="track-point--open"
-              class="relative cursor-pointer flex-0"
-            >
-              <div
-                data-bdtl="track-point__number"
-                class="flex items-center justify-center w-8 h-8 text-center rounded-full text-slate-800 bg-slate-400"
-              >
-                3
-              </div>
-              <div class="absolute flex flex-col items-center w-0 left-1/2">
-                <div data-bdtl="track-point__name" class="text-center">
-                  OPEN
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Questions -->
-          <div data-bdtl="question-root" class="flex items-center">
-            <div
-              data-bdtl="question-arrow--left"
-              class="flex-grow-0 w-16 text-center cursor-pointer"
-            >
-              ←
-            </div>
-            <div data-bdtl="question-container" class="flex-grow">
-              <div data-bdtl="question" class="p-8 mb-4 shadow">
-                <div data-bdtl="question__title">Ausrichtung</div>
-                <div data-bdtl="question__question">
-                  Unsere Kirche/Organisation
-                </div>
-                <div data-bdtl="answer-root">
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [+50] hat eine klare Vision und macht deutliche
-                      Fortschritte dorthin
-                    </label>
-                  </div>
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [-60] scheint seine Richtung alle paar Monate zu ändern
-                    </label>
-                  </div>
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [-60] hat keine klare Vision und wankt hin und her
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div data-bdtl="question" class="p-8 mb-4 shadow">
-                <div data-bdtl="question__title">Mitglieder</div>
-                <div data-bdtl="question__question">
-                  Unsere Leute sind meist
-                </div>
-                <div data-bdtl="answer-root">
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [+50] Positive Einflussnehmer in Gemeinde & Beruf
-                    </label>
-                  </div>
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [-60] eher passive Besucher, statt aktive Einflussnehmer
-                    </label>
-                  </div>
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [-60] zögerlich, wenn es darum geht Verantwortung zu
-                      übernehmen
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div data-bdtl="question" class="p-8 mb-4 shadow">
-                <div data-bdtl="question__title">Entwicklung</div>
-                <div data-bdtl="question__question">
-                  Unsere Ehrenamtler bzw. Angestellten...
-                </div>
-                <div data-bdtl="answer-root">
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [+50] besuchen regelmäßig Fortbildung & werden kompetenter
-                    </label>
-                  </div>
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [-60] sehen meist keinen wirklichen Bedarf für Entwicklung
-                    </label>
-                  </div>
-                  <div data-bdtl="answer">
-                    <input type="checkbox" data-bdtl="answer__checkbox" />
-                    <label data-bdtl="answer__label">
-                      [-60] machen seit Jahren die gleichen Dinge gleich
-                      gut/schlecht
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              data-bdtl="question-arrow--right"
-              class="flex-grow-0 w-16 text-center cursor-pointer"
-            >
-              →
-            </div>
-          </div>
-
-          <!-- Evaluation -->
-          <div class="mt-8" data-bdtl="evaluation-root">
-            <h3 class="text-2xl font-bold">
-              Potenzial für mehr Gesundheit & Wachstum
-            </h3>
-            <h4 class="mb-8 text-2xl">
-              (durch gute Leitung & Leiterentwicklung)
-            </h4>
-            <div class="flex">
-              <div class="grow-0 max-w-[20%]">
-                Leiterentwicklung geschieht vermutlich zu wenig
-              </div>
-              <div
-                class="relative flex items-center h-4 mx-20 rounded-full grow bg-gradient-to-l from-green-600 via-yellow-400 to-red-400"
-              >
-                <div
-                  data-bdtl="evaluation-point"
-                  class="absolute flex justify-center w-7 h-7 -ml-[0.875rem] -mr-[0.875rem] transition-all duration-300 ease-in-out bg-white border-2 border-black rounded-full"
-                >
-                  <div>
-                    <div class="w-1 h-10 mx-auto mt-8 bg-black"></div>
-                    <div data-bdtl="evaluation-text" class="text-center w-44">
-                      Enorm hohes Potenzial für Leiterentwicklung | Sehr Hohes
-                      Potenzial für Leiterentwicklung | Hohes Potenzial für
-                      Leiterentwicklung | Leiterentwicklung existiert, kann aber
-                      optimiert werden | Leiterentwicklung funktioniert, gebt es
-                      anderen weiter | Ihr seid vermutlich die beste Kirche der
-                      Nation
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="grow-0 max-w-[20%]">
-                Leiterentwicklung vermutlich in vollem Gange
-              </div>
-            </div>
-          </div>
-
-          <!-- Download Content -->
-          <div class="mt-32" data-bdtl="download-root">
-            <button
-              data-bdtl="download-button"
-              class="px-4 py-2 mt-8 text-white bg-blue-500 rounded-md"
-            >
-              Ergebnisse herunterladen
-            </button>
-          </div>
-
-          <!-- Finish Content -->
-          <div class="mt-8" data-bdtl="finish-root">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi
-            consequuntur fugiat necessitatibus quos ea illo magni dolorum
-            perferendis nemo enim, blanditiis possimus numquam quo laboriosam
-            quis accusantium maxime facere sed.
-            <iframe
-              data-bdtl="finish-root__file-iframe"
-              src="https://api.leadconnectorhq.com/widget/form/WuJPpANSZHLMwqY1p1gl?file-content=${fileContent}&abgeschickt-am=${currentDate}"
-              class="w-full h-screen"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
     <script type="module" src="index.js"></script>
   </body>
 </html>

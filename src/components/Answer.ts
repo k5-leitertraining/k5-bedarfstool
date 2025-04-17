@@ -1,24 +1,26 @@
 import { defineComponent, computed, PropType } from 'vue'
 import { getTemplate } from './getTemplate.js'
+import Answer from './Answer.html'
 
 export default defineComponent({
-  template: getTemplate({
-    templateRoot: 'answer',
-    dataInjects: {
-      answer__label: 'label',
-    },
-    withVModel: {
-      answer__checkbox: 'value',
-    },
-    withAttrs: {
-      answer__checkbox: {
-        ':id': 'id',
+  template:
+    getTemplate({
+      templateRoot: 'answer',
+      dataInjects: {
+        answer__label: 'label',
       },
-      answer__label: {
-        ':for': 'id',
+      withVModel: {
+        answer__checkbox: 'value',
       },
-    },
-  }),
+      withAttrs: {
+        answer__checkbox: {
+          ':id': 'id',
+        },
+        answer__label: {
+          ':for': 'id',
+        },
+      },
+    }) || Answer,
   props: {
     label: {
       type: String,

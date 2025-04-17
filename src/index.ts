@@ -6,29 +6,31 @@ import DownloadRoot from './components/DownloadRoot.js'
 import FinishRoot from './components/FinishRoot.js'
 import { getTemplate } from './components/getTemplate.js'
 import { useEvaluation } from './data/evaluation.js'
+import App from './components/App.html'
 
 createApp({
-  template: getTemplate({
-    templateRoot: '#bdtl-app',
-    shouldSkipRoot: true,
-    templateReplaces: {
-      'track-root': /* html */ `
+  template:
+    getTemplate({
+      templateRoot: '#bdtl-app, .bdtl-app',
+      shouldSkipRoot: true,
+      templateReplaces: {
+        'track-root': /* html */ `
         <track-root />
       `,
-      'question-root': /* html */ `
+        'question-root': /* html */ `
         <question-root />
       `,
-      'evaluation-root': /* html */ `
+        'evaluation-root': /* html */ `
         <evaluation-root />
       `,
-      'download-root': /* html */ `
-        <download-root ref='downloadRoot' v-show="isFinished" />
+        'download-root': /* html */ `
+        <download-root ref="downloadRoot" v-show="isFinished" />
       `,
-      'finish-root': /* html */ `
+        'finish-root': /* html */ `
         <finish-root v-if="isFinished" />
       `,
-    },
-  }),
+      },
+    }) || App,
   components: {
     TrackRoot,
     QuestionRoot,
@@ -55,4 +57,4 @@ createApp({
       downloadRoot,
     }
   },
-}).mount('#bdtl-app')
+}).mount('#bdtl-app, .bdtl-app')

@@ -10,9 +10,10 @@
     "build:css": "tailwindcss -i ./src/style.css -o ./dist/style.css",
     "dev": "concurrently \"pnpm:dev:*\"",
     "dev:transpile": "tsup --watch",
-    "dev:server": "cd dist && live-server",
+    "dev:server": "cd dist && live-server --cors",
     "dev:tailwind": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -39,5 +40,5 @@
   "dependencies": {
     "vue": "^3.3.8"
   },
-  "packageManager": "pnpm@8.14.1+sha256.2df78e65d433d7693b9d3fbdaf431b2d96bb4f96a2ffecd51a50efe16e50a6a8"
+  "packageManager": "pnpm@10.8.1+sha256.d8b2ebbc65cf02c349eca6b45c9640b910f16b6adebdb7b926e9db440e47cac7"
 }

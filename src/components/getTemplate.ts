@@ -28,7 +28,9 @@ export const getTemplate = ({
   const templateElement = templateRootElement.cloneNode(true) as HTMLElement
   if (dataInjects) {
     Object.entries(dataInjects).forEach(([key, value]) => {
-      const elements = templateElement.querySelectorAll(`[data-bdtl="${key}"]`)
+      const elements = templateElement.querySelectorAll(
+        `[data-bdtl="${key}"], .bdtl-${key}`
+      )
       elements.forEach((element) => {
         element.textContent = `{{${value}}}`
       })
@@ -47,7 +49,9 @@ export const getTemplate = ({
         })
         return
       }
-      const elements = templateElement.querySelectorAll(`[data-bdtl="${key}"]`)
+      const elements = templateElement.querySelectorAll(
+        `[data-bdtl="${key}"], .bdtl-${key}`
+      )
       elements.forEach((element) => {
         element.innerHTML = value
       })
@@ -66,7 +70,9 @@ export const getTemplate = ({
         })
         return
       }
-      const elements = templateElement.querySelectorAll(`[data-bdtl="${key}"]`)
+      const elements = templateElement.querySelectorAll(
+        `[data-bdtl="${key}"], .bdtl-${key}`
+      )
       elements.forEach((element) => {
         element.outerHTML = value
       })
@@ -74,7 +80,9 @@ export const getTemplate = ({
   }
   if (withVModel) {
     Object.entries(withVModel).forEach(([key, value]) => {
-      const element = templateElement.querySelector(`[data-bdtl="${key}"]`)
+      const element = templateElement.querySelector(
+        `[data-bdtl="${key}"], .bdtl-${key}`
+      )
       if (element) {
         element.setAttribute('v-model', value)
       }
@@ -82,7 +90,9 @@ export const getTemplate = ({
   }
   if (withAttrs) {
     Object.entries(withAttrs).forEach(([key, value]) => {
-      const element = templateElement.querySelector(`[data-bdtl="${key}"]`)
+      const element = templateElement.querySelector(
+        `[data-bdtl="${key}"], .bdtl-${key}`
+      )
       if (element) {
         Object.entries(value).forEach(([attr, attrValue]) => {
           if (attr.startsWith(':')) {

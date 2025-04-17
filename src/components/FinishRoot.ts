@@ -4,26 +4,29 @@ import { template } from 'lodash-es'
 import { useDownload } from '../data/download.js'
 import { useResultTracking } from '../api/useResultTracking.js'
 import { useFormSubmissionData } from '../utils/useFormSubmissionData.js'
+import FinishRoot from './FinishRoot.html'
 
 const getSrc = () => {
   return (
     document
       .querySelector('[data-bdtl="finish-root__file-iframe"]')
-      ?.getAttribute('src') || ''
+      ?.getAttribute('src') ||
+    'https://api.leadconnectorhq.com/widget/form/WuJPpANSZHLMwqY1p1gl?file-content=${fileContent}&abgeschickt-am=${currentDate}'
   )
 }
 
 const srcTemplate = template(getSrc())
 
 export default defineComponent({
-  template: getTemplate({
-    templateRoot: 'finish-root',
-    withAttrs: {
-      'finish-root__file-iframe': {
-        ':src': 'src',
+  template:
+    getTemplate({
+      templateRoot: 'finish-root',
+      withAttrs: {
+        'finish-root__file-iframe': {
+          ':src': 'src',
+        },
       },
-    },
-  }),
+    }) || FinishRoot,
   setup() {
     const { fileContent } = useDownload()
     const src = computed(() => {

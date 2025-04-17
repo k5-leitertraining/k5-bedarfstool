@@ -3,22 +3,24 @@ import { getTemplate } from './getTemplate.js'
 import TrackPoint from './TrackPoint.js'
 import { useTrackPoints } from '../data/trackPoints.js'
 import { useQuestions } from '../data/questions.js'
+import TrackRoot from './TrackRoot.html'
 
 export default defineComponent({
-  template: getTemplate({
-    templateRoot: 'track-root',
-    templateInjects: {
-      '&': /* html */ `
+  template:
+    getTemplate({
+      templateRoot: 'track-root',
+      templateInjects: {
+        '&': /* html */ `
         <template v-for="(trackPoint, index) in trackPoints">
-          <track-point 
-            :track-point="trackPoint" 
+          <track-point
+            :track-point="trackPoint"
             :with-track="isFirstTrackPoint(index) ? undefined : isTrackDone(index) ? 'done' : 'open'"
             @click="setCurrentQuestionIndex(index)"
           />
         </template>
       `,
-    },
-  }),
+      },
+    }) || TrackRoot,
   setup() {
     const { trackPoints } = useTrackPoints()
     const { setCurrentQuestionIndex } = useQuestions()

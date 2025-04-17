@@ -12,4 +12,7 @@ export default defineConfig({
     js: '.js',
   }),
   publicDir: true,
+  loader: {
+    '.html': 'text',
+  },
 })

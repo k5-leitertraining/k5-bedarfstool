@@ -1,0 +1,15 @@
+<div data-bdtl="question" class="p-8 mb-4 shadow-[0_2px_5px_#0003] rounded-lg">
+  <div data-bdtl="question__title" class="text-xl font-[600]">{{title}}</div>
+  <div data-bdtl="question__question" class="text-xl font-[500]">
+    {{question}}
+  </div>
+  <div data-bdtl="answer-root" class="mt-4 text-[1.1rem] leading-6">
+    <answer
+      v-for="(answer, index) in answers"
+      :key="index"
+      :label="answer.label"
+      :model-value="answer.value"
+      @update:model-value="$emit('update:answer', { index, value: $event })"
+    />
+  </div>
+</div>

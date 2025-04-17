@@ -1,0 +1,16 @@
+<div class="max-w-[1364px] mx-auto font-['Barlow']">
+  <!-- Track -->
+  <track-root class="text-xl" />
+
+  <!-- Questions -->
+  <question-root />
+
+  <!-- Evaluation -->
+  <evaluation-root />
+
+  <!-- Download Content -->
+  <download-root ref="downloadRoot" v-show="isFinished" />
+
+  <!-- Finish Content -->
+  <finish-root v-if="isFinished" />
+</div>
